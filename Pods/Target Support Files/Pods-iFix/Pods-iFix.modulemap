@@ -1,0 +1,6 @@
+framework module Pods_iFix {
+  umbrella header "Pods-iFix-umbrella.h"
+
+  export *
+  module * { export * }
+}

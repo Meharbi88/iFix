@@ -10,7 +10,9 @@ import UIKit
 import Firebase
 
 class SignInViewController: UIViewController {
-
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
+    @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
@@ -19,14 +21,17 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        logInButton.isEnabled = true;
         // Do any additional setup after loading the view.
     }
 
     @IBAction func logIn(_ sender: Any) {
+        
         if(emailTextField.text == "" || passwordTextField.text == ""){
             showAlert()
         }else{
+            logInButton.isEnabled = false;
+            activityIndicatorView.startAnimating()
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
                 
                 if let e = error {
@@ -43,9 +48,13 @@ class SignInViewController: UIViewController {
                         let type = value?.value(forKey: "type") as! String
                         print(type)
                         if(type == "User"){
+                            self.activityIndicatorView.stopAnimating()
                             self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
+                            
                         }else{
+                            self.activityIndicatorView.stopAnimating()
                             self.performSegue(withIdentifier: "GoHomeServiceProvider", sender: nil)
+                            
                         }
                     }) { (error) in
                         print(error.localizedDescription)

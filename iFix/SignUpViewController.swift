@@ -11,8 +11,6 @@ import Firebase
 
 class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
-    
-
     @IBOutlet weak var userTypeSegement: UISegmentedControl!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -21,7 +19,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBOutlet weak var iCanDoLabel: UILabel!
     @IBOutlet weak var serviceTypesPicker: UIPickerView!
     var type : String = "Plumping"
-    let sub = ["Plumping", "Moving", "Appliance Repair", "Installation", "Cleaning"]
+    let sub = ["Plumping", "Cars", "Home Appliances", "Electricity", "Electronic Devices", "Smart Phones"]
     
     
     override func viewDidLoad() {

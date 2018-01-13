@@ -36,29 +36,30 @@ class SignInViewController: UIViewController {
                 
                 if let e = error {
                     self.showAlertWrongInfo(description: e.localizedDescription)
+                    
                 }
                 
-                if let u = user {
-                    let id = u.uid
+                if let u1 = user {
+                    let id = u1.uid
                     var ref: DatabaseReference!
                     ref = Database.database().reference()
                     ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
                         let value = snapshot.value as? NSDictionary
-                        let type = value?.value(forKey: "type") as! String
-                        print(type)
-                        if(type == "User"){
-                            self.activityIndicatorView.stopAnimating()
-                            self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
-                            
+                        if (value != nil){
+                            let type = value?.value(forKey: "type") as! String
+                            if(type == "User"){
+                                self.activityIndicatorView.stopAnimating()
+                                self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
+                            }
                         }else{
                             self.activityIndicatorView.stopAnimating()
                             self.performSegue(withIdentifier: "GoHomeServiceProvider", sender: nil)
-                            
                         }
                     }) { (error) in
                         print(error.localizedDescription)
                     }
+                    
                     
                 }
             })
@@ -95,7 +96,13 @@ class SignInViewController: UIViewController {
         let title = "Wrong Information"
         let message = description
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let actionOk = UIAlertAction(title: "OK", style: .default , handler: nil)
+        let actionOk = UIAlertAction(title: "OK", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.activityIndicatorView.stopAnimating()
+            self.emailTextField.text = ""
+            self.passwordTextField.text = ""
+            self.logInButton.isEnabled = true
+        })
         alertController.addAction(actionOk)
         present(alertController, animated: true, completion: nil)
     }

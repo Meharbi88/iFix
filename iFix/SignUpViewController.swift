@@ -58,7 +58,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                     if let u = user {
                         let reqularUser: User = User(email: self.emailTextField.text! ,firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: "User", userId: u.uid)
                         
-                        self.saveInDatabase(user: reqularUser)
+                        self.saveUserInDatabase(user: reqularUser)
                         self.performSegue(withIdentifier: "GoSignIn", sender: nil)
                     }
                 }
@@ -70,8 +70,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
 
                     }
                     if let u = user {
-                        let serviceProviderUser: User = User(email: self.emailTextField.text! ,firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: self.type, userId: u.uid)
-                        self.saveInDatabase(user: serviceProviderUser)
+                        let serviceProviderUser: ServiceProvider = ServiceProvider(email: self.emailTextField.text! ,firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: self.type, userId: u.uid)
+                        self.saveServiceProviderInDatabase(serviceProvider: serviceProviderUser)
                         self.performSegue(withIdentifier: "GoSignIn", sender: nil)
                     }
                 }
@@ -103,8 +103,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         present(alertController, animated: true, completion: nil)
     }
     
-    func saveInDatabase(user: User){
-        
+    func saveUserInDatabase(user: User){
+
         var ref: DatabaseReference!
         ref = Database.database().reference()
         
@@ -113,6 +113,18 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         ref.root.child("users").child(user.userId).setValue(user1)
 
 
+    }
+    
+    func saveServiceProviderInDatabase(serviceProvider: ServiceProvider){
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        let serviceProvider1 = ["email": serviceProvider.email, "firstName": serviceProvider.firstName, "lastName": serviceProvider.lastName,"password": serviceProvider.password,"type":serviceProvider.type,"userId": serviceProvider.userId]
+        
+        ref.root.child("serviceProviders").child(serviceProvider.userId).setValue(serviceProvider1)
+        
+        
     }
     
     @IBAction func userTypeSegmentChanged(_ sender: UISegmentedControl) {

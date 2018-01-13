@@ -11,7 +11,8 @@ import Firebase
 
 class UserHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-
+    @IBOutlet weak var myTable: UITableView!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataCurrentUser.unclaimedServices.count
     }
@@ -27,13 +28,22 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //try! Auth.auth().signOut()
-    }
+        myTable.reloadData()
 
+    }
+    
+
+
+    @IBAction func refreshPage(_ sender: Any) {
+        print(DataCurrentUser.unclaimedServices.count)
+        myTable.reloadData()
+        
+    }
+    
     @IBAction func logOut(_ sender: Any) {
-        print(DataCurrentUser.unclaimedServices[0].name)
         try! Auth.auth().signOut()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

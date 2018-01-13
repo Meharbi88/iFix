@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class HistoryViewController: UIViewController {
 
+    @IBAction func logOut(_ sender: Any) {
+        try! Auth.auth().signOut()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

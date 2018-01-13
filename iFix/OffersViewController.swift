@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Firebase
 
 class OffersViewController: UIViewController {
 
+    @IBAction func logOut(_ sender: Any) {
+        try! Auth.auth().signOut()
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -10,16 +10,20 @@ import UIKit
 import Firebase
 
 class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate {
+    
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var serviceName: UITextField!
     @IBOutlet weak var userPhoneNumber: UITextField!
     @IBOutlet weak var userAddress: UITextField!
     @IBOutlet weak var serviceDescription: UITextView!
     @IBOutlet weak var serviceTypesPicker: UIPickerView!
+    
     var type : String = "Plumping"
+    
     let sub = ["Plumping", "Cars", "Home Appliances", "Electricity", "Electronic Devices", "Smart Phones"]
     
     @IBAction func serivceRequestSubmit(_ sender: Any) {
+        
         if(serviceName.text! == "" || userPhoneNumber.text! == "" || userAddress.text! == ""){
             showAlertEmptyField()
         }else{
@@ -38,13 +42,16 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
                 print("Error")
                 })
             ref.root.child("users").child(service.userId).child("services").child(service.status).child(key).setValue(service1, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
-                print("Error")
+                print("inside the write")
+                if(DataCurrentUser.loadUnclimedData()){
+                    self.showAlert()
+                }
             })
-            //showAlert()
             activityIndicatorView.stopAnimating()
-            performSegue(withIdentifier: "backToHomeAfterSubmitingARequest", sender: nil)
+            
         }
     }
+
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         type = sub[row]
@@ -75,7 +82,10 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
         let title = "Submitted"
         let message = "Your request has been submitted"
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let actionOk = UIAlertAction(title: "OK", style: .default , handler: nil)
+        let actionOk = UIAlertAction(title: "OK", style: .default , handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.performSegue(withIdentifier: "backToHomeAfterSubmitingARequest", sender: nil)
+        })
         alertController.addAction(actionOk)
         present(alertController, animated: true, completion: nil)
     }

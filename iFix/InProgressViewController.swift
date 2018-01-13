@@ -7,9 +7,16 @@
 //
 
 import UIKit
-
+import Firebase
 class InProgressViewController: UIViewController {
 
+    
+    @IBAction func logOut(_ sender: Any) {
+        try! Auth.auth().signOut()
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

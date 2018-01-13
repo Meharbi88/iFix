@@ -42,6 +42,8 @@ class SignInViewController: UIViewController {
                 if let u1 = user {
                     let id = u1.uid
                     var ref: DatabaseReference!
+                    DataCurrentUser.userId = (Auth.auth().currentUser?.uid)!
+                    if(DataCurrentUser.loadUnclimedData()){
                     ref = Database.database().reference()
                     ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
@@ -60,7 +62,7 @@ class SignInViewController: UIViewController {
                         print(error.localizedDescription)
                     }
                     
-                    
+                    }
                 }
             })
         }

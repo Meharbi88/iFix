@@ -9,16 +9,29 @@
 import UIKit
 import Firebase
 
-class UserHomeViewController: UIViewController, UINavigationBarDelegate {
+class UserHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return DataCurrentUser.unclaimedServices.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let unclaimedCell = tableView.dequeueReusableCell(withIdentifier: "uncalimedServicesCell", for: indexPath) as! UnclaimedServicesTableViewCell
+        unclaimedCell.serviceName.text = DataCurrentUser.unclaimedServices[indexPath.row].name
+        unclaimedCell.serviceType.text = DataCurrentUser.unclaimedServices[indexPath.row].type
+        unclaimedCell.serviceId = DataCurrentUser.unclaimedServices[indexPath.row].serviceId
+        return unclaimedCell
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //try! Auth.auth().signOut()
-
     }
 
     @IBAction func logOut(_ sender: Any) {
+        print(DataCurrentUser.unclaimedServices[0].name)
         try! Auth.auth().signOut()
     }
     override func didReceiveMemoryWarning() {
@@ -26,7 +39,6 @@ class UserHomeViewController: UIViewController, UINavigationBarDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 

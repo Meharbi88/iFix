@@ -9,13 +9,13 @@
 import UIKit
 import Firebase
 
-class UserHomeViewController: UIViewController {
+class UserHomeViewController: UIViewController, UINavigationBarDelegate {
 
-    @IBOutlet weak var label: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        label.text = Auth.auth().currentUser?.email
         // Do any additional setup after loading the view.
+        //try! Auth.auth().signOut()
+
     }
 
     @IBAction func logOut(_ sender: Any) {

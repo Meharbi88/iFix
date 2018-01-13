@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -201,7 +201,7 @@
                                                 <state key="normal" title="Request a service"/>
                                             </button>
                                             <connections>
-                                                <segue destination="wTQ-Lj-4gx" kind="showDetail" id="hYu-Uo-z8Q"/>
+                                                <segue destination="wTQ-Lj-4gx" kind="showDetail" id="bwj-NY-C2u"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -263,7 +263,7 @@
                                                 <state key="normal" title="Request a service"/>
                                             </button>
                                             <connections>
-                                                <segue destination="wTQ-Lj-4gx" kind="showDetail" id="U6g-2R-PIj"/>
+                                                <segue destination="wTQ-Lj-4gx" kind="showDetail" id="7wR-7i-vTA"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -282,7 +282,7 @@
         <!--Home-->
         <scene sceneID="Urt-j0-Pwu">
             <objects>
-                <viewController id="p7e-hJ-3fq" sceneMemberID="viewController">
+                <viewController id="p7e-hJ-3fq" customClass="UserHomeViewController" customModule="iFix" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BOy-PX-Kss">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,22 +298,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Nj-n7-aSp" id="lk0-iQ-Rfn">
                                             <rect key="frame" x="0.0" y="0.0" width="296" height="55.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type of service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B4Q-7R-jtd">
-                                                    <rect key="frame" x="15" y="17" width="149" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28O-Ky-mfe">
-                                                    <rect key="frame" x="179" y="17" width="106" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -330,9 +314,13 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Log out"/>
                                                 <connections>
+                                                    <action selector="logOut:" destination="p7e-hJ-3fq" eventType="touchUpInside" id="fHY-io-bQl"/>
                                                     <segue destination="edK-6h-Zvq" kind="showDetail" id="Oaa-Iz-9fK"/>
                                                 </connections>
                                             </button>
+                                            <connections>
+                                                <action selector="logOut:" destination="p7e-hJ-3fq" id="Bcf-9p-lB3"/>
+                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" id="rdL-UA-dc5">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Are-we-ee6">
@@ -340,12 +328,19 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Request a service"/>
                                                 <connections>
-                                                    <segue destination="wTQ-Lj-4gx" kind="showDetail" id="h4w-f4-UYC"/>
+                                                    <segue destination="wTQ-Lj-4gx" kind="showDetail" id="9sj-aB-mX9"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
+                                        <connections>
+                                            <outlet property="leftBarButtonItem" destination="Cr6-xV-Lnw" id="ITp-vw-zGR"/>
+                                            <outlet property="rightBarButtonItem" destination="rdL-UA-dc5" id="xaR-hf-dBV"/>
+                                        </connections>
                                     </navigationItem>
                                 </items>
+                                <connections>
+                                    <outlet property="delegate" destination="p7e-hJ-3fq" id="3KN-cM-HqU"/>
+                                </connections>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -357,10 +352,10 @@
             </objects>
             <point key="canvasLocation" x="4741.6000000000004" y="-2442.1182266009855"/>
         </scene>
-        <!--View Controller-->
+        <!--Service Request View Controller-->
         <scene sceneID="CdC-8y-fuy">
             <objects>
-                <viewController id="wTQ-Lj-4gx" sceneMemberID="viewController">
+                <viewController id="wTQ-Lj-4gx" customClass="ServiceRequestViewController" customModule="iFix" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kQQ-fQ-giy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -377,14 +372,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="tel"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jSw-Ho-BIi">
                                 <rect key="frame" x="16" y="168" width="222" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="location"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbO-JR-nZF">
                                 <rect key="frame" x="16" y="206" width="343" height="21"/>
@@ -405,10 +400,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="serivceRequestSubmit:" destination="wTQ-Lj-4gx" eventType="touchUpInside" id="4X4-2N-lQs"/>
+                                    <segue destination="p7e-hJ-3fq" kind="showDetail" id="i2F-Mk-uak"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2c-EB-NGH">
-                                <rect key="frame" x="16" y="235" width="343" height="162"/>
+                                <rect key="frame" x="16" y="275" width="343" height="86"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wTQ-Lj-4gx" id="LYT-Bb-5gq"/>
+                                    <outlet property="delegate" destination="wTQ-Lj-4gx" id="JsY-Yg-Ckq"/>
+                                </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLv-Qt-bM4">
                                 <rect key="frame" x="246" y="168" width="115" height="30"/>
@@ -419,6 +422,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BAw-bI-cRe"/>
                     </view>
+                    <connections>
+                        <outlet property="serviceDescription" destination="fOl-2v-WCQ" id="cDI-DV-wMQ"/>
+                        <outlet property="serviceName" destination="0gS-1F-DKl" id="OHm-wb-mfJ"/>
+                        <outlet property="userAddress" destination="jSw-Ho-BIi" id="Waw-qO-RRx"/>
+                        <outlet property="userPhoneNumber" destination="opL-rr-xfa" id="hp5-TA-5mI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xvH-BR-brK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -543,7 +552,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="h4w-f4-UYC"/>
+        <segue reference="9sj-aB-mX9"/>
+        <segue reference="Fc9-Cm-etN"/>
         <segue reference="Oaa-Iz-9fK"/>
     </inferredMetricsTieBreakers>
 </document>

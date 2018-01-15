@@ -21,6 +21,8 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.text = "meharbi88@gmail.com"
+        passwordTextField.text = "1804947"
         logInButton.isEnabled = true;
         // Do any additional setup after loading the view.
     }
@@ -44,10 +46,10 @@ class SignInViewController: UIViewController {
                     var ref: DatabaseReference!
                     DataCurrentUser.userId = (Auth.auth().currentUser?.uid)!
                     DataCurrentUser.loadCurrentUserData()
-                    DataCurrentUser.loadUnclimedServicesData()
+                    DataCurrentUser.loadUnclaimedServicesData()
+                    DataCurrentUser.loadServices1()
                     DataCurrentUser.loadInProgressServicesData()
                     DataCurrentUser.loadCompleteServicesData()
-                    DataCurrentUser.loadServices()
                     ref = Database.database().reference()
                     ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
@@ -55,6 +57,7 @@ class SignInViewController: UIViewController {
                         if (value != nil){
                             let type = value?.value(forKey: "type") as! String
                             if(type == "User"){
+                                //self.showAlertSuccess()
                                 self.activityIndicatorView.stopAnimating()
                                 self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
                             }
@@ -87,12 +90,27 @@ class SignInViewController: UIViewController {
         
     }
     
+    
     func showAlert(){
         
         let title = "Empty Field"
         let message = "Sorry, You have entered an empty field please fill in all the required fields"
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .default , handler: nil)
+        alertController.addAction(actionOk)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertSuccess(){
+        let title = "Success"
+        let message = "Success"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "OK", style: .default , handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.activityIndicatorView.stopAnimating()
+            self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
+            
+        })
         alertController.addAction(actionOk)
         present(alertController, animated: true, completion: nil)
     }

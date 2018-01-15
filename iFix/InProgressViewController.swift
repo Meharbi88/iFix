@@ -8,7 +8,23 @@
 
 import UIKit
 import Firebase
-class InProgressViewController: UIViewController {
+class InProgressViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var inProgressTable: UITableView!
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return DataCurrentUser.inProgressServices.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let inProgressCell = tableView.dequeueReusableCell(withIdentifier: "inProgressServiceCell", for: indexPath) as! InProgressTableViewCell
+        
+        inProgressCell.serviceName.text = DataCurrentUser.inProgressServices[indexPath.row].name
+        inProgressCell.serviceType.text = DataCurrentUser.inProgressServices[indexPath.row].type
+        
+        return inProgressCell
+    }
+    
 
     
     @IBAction func logOut(_ sender: Any) {
@@ -19,7 +35,7 @@ class InProgressViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        inProgressTable.reloadData()
         // Do any additional setup after loading the view.
     }
 

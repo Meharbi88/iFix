@@ -24,7 +24,6 @@ class DataCurrentUser: NSObject {
         ref.child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
-            print(value?.allKeys ?? "")
             if(value != nil){
                 let type = value?.value(forKey: "type") as! String
                 let email = value?.value(forKey: "email") as! String
@@ -41,18 +40,17 @@ class DataCurrentUser: NSObject {
     }
     
     
-    class func loadUnclimedServicesData(){
+    class func loadUnclaimedServicesData(){
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        ref.child("users").child(userId).child("services").child("listOfUnclimedServices").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(userId).child("listOfUnclaimedServices").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            print(value?.allKeys ?? "")
+            let value = snapshot.value as? NSArray
             if(value != nil){
-                for serviceId in (value?.allValues)!{
-                    print (serviceId)
-                    user.listOfUnclimedServices.append(serviceId as! String)
+                for serviceId in value!{
+                    user.listOfUnclaimedServices.append(serviceId as! String)
                 }
+                DataCurrentUser.loadServices1()
             }
             })
             { (error) in
@@ -63,15 +61,15 @@ class DataCurrentUser: NSObject {
     class func loadInProgressServicesData(){
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        ref.child("users").child(userId).child("services").child("listOfInProgressServices").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(userId).child("listOfInProgressServices").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            print(value?.allKeys ?? "")
+            let value = snapshot.value as? NSArray
             if(value != nil){
-                for serviceId in (value?.allValues)!{
+                for serviceId in value!{
                     print (serviceId)
                     user.listOfInProgressServices.append(serviceId as! String)
                 }
+                DataCurrentUser.loadServices2()
             }
         })
         { (error) in
@@ -82,15 +80,15 @@ class DataCurrentUser: NSObject {
     class func loadCompleteServicesData(){
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        ref.child("users").child(userId).child("services").child("listOfCompleteServices").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(userId).child("listOfCompleteServices").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
-            let value = snapshot.value as? NSDictionary
-            print(value?.allKeys ?? "")
+            let value = snapshot.value as? NSArray
             if(value != nil){
-                for serviceId in (value?.allValues)!{
+                for serviceId in value!{
                     print (serviceId)
                     user.listOfCompleteServices.append(serviceId as! String)
                 }
+                DataCurrentUser.loadServices3()
             }
         })
         { (error) in
@@ -101,13 +99,12 @@ class DataCurrentUser: NSObject {
     class func loadOffersData(){
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        ref.child("users").child(userId).child("services").child("listOfOffers").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(userId).child("listOfOffers").observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             print(value?.allKeys ?? "")
             if(value != nil){
                 for serviceId in (value?.allValues)!{
-                    print (serviceId)
                     user.listOfOffers.append(serviceId as! String)
                 }
             }
@@ -117,15 +114,14 @@ class DataCurrentUser: NSObject {
         }
     }
     
-    class func loadServices(){
-        
-        for unclimedServiceId in user.listOfUnclimedServices{
+    class func loadServices1(){
+        print("\(user.listOfUnclaimedServices.count)")
+        for unclaimedServiceId in user.listOfUnclaimedServices{
             var ref: DatabaseReference!
             ref = Database.database().reference()
-            ref.child("unclaimed services").child(unclimedServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
+            ref.child("unclaimed services").child(unclaimedServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
-                print(value?.allKeys ?? "")
                 if(value != nil){
                     let type = value?.value(forKey: "type") as! String
                     let name = value?.value(forKey: "name") as! String
@@ -138,11 +134,20 @@ class DataCurrentUser: NSObject {
 
                     unclaimedServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, status: status, userPhone: userPhone, userAddress: userAddress))
                 }
+ 
             })
             { (error) in
                 print(error.localizedDescription)
             }
         }
+
+        
+        
+        
+    }
+    
+    class func loadServices2(){
+
         
         for inProgressServiceId in user.listOfInProgressServices{
             var ref: DatabaseReference!
@@ -150,7 +155,6 @@ class DataCurrentUser: NSObject {
             ref.child("in progress services").child(inProgressServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
-                print(value?.allKeys ?? "")
                 if(value != nil){
                     let type = value?.value(forKey: "type") as! String
                     let name = value?.value(forKey: "name") as! String
@@ -169,13 +173,19 @@ class DataCurrentUser: NSObject {
             }
         }
         
+
+        
+        
+        
+    }
+    
+    class func loadServices3(){
         for completeServiceId in user.listOfCompleteServices{
             var ref: DatabaseReference!
             ref = Database.database().reference()
             ref.child("complete services").child(completeServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
-                print(value?.allKeys ?? "")
                 if(value != nil){
                     let type = value?.value(forKey: "type") as! String
                     let name = value?.value(forKey: "name") as! String
@@ -197,6 +207,5 @@ class DataCurrentUser: NSObject {
         
         
     }
-    
     
 }

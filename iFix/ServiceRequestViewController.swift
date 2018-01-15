@@ -42,9 +42,9 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
 //                })
             
            var ref2: DatabaseReference!
-           ref2 = Database.database().reference().child("users").child(uid!).child("listOfUnclimedServices").child("\(DataCurrentUser.user.listOfUnclimedServices.count)")
+           ref2 = Database.database().reference().child("users").child(uid!).child("listOfUnclaimedServices").child("\(DataCurrentUser.user.listOfUnclaimedServices.count)")
             ref2.setValue(service.serviceId)
-            DataCurrentUser.user.listOfUnclimedServices.append(service.serviceId)
+            DataCurrentUser.user.listOfUnclaimedServices.append(service.serviceId)
             //DataCurrentUser.loadServices()
             DataCurrentUser.unclaimedServices.append(service)
             showAlertSubmitted()

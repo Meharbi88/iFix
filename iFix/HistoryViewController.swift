@@ -9,7 +9,21 @@
 import UIKit
 import Firebase
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return DataCurrentUser.completeServices.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let completeCell = tableView.dequeueReusableCell(withIdentifier: "completeServiceCell", for: indexPath) as! CompleteTableViewCell
+        
+        completeCell.serviceName.text = DataCurrentUser.completeServices[indexPath.row].name
+        completeCell.serviceType.text = DataCurrentUser.completeServices[indexPath.row].type
+        
+        return completeCell
+    }
+    
 
     @IBAction func logOut(_ sender: Any) {
         try! Auth.auth().signOut()

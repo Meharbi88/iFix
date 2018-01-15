@@ -10,44 +10,192 @@ import UIKit
 import Firebase
 
 class DataCurrentUser: NSObject {
-
+    
     static var userId : String = ""
+    static var user : User = User()
     static var unclaimedServices : [Service] = []
     //static var offersServices : [Offer] = []
-    //static var inProgressServices : [Service] = []
-    //static var historyServices : [Service] = []
+    static var inProgressServices : [Service] = []
+    static var completeServices : [Service] = []
     
-    class func loadUnclimedData() -> Bool{
-        unclaimedServices = []
+    class func loadCurrentUserData(){
         var ref: DatabaseReference!
         ref = Database.database().reference()
-        ref.child("users").child(userId).child("services").child("unclaimed").observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             print(value?.allKeys ?? "")
             if(value != nil){
-            for serviceId in (value?.allKeys)!{
-                let value2 = snapshot.childSnapshot(forPath: serviceId as! String).value as? NSDictionary
-                print (value2?.allKeys ?? "")
-                let type = (value2 as AnyObject).value(forKey: "type") as! String
-                let name = (value2 as AnyObject).value(forKey: "name") as! String
-                let description = (value2 as AnyObject).value(forKey: "description") as! String
-                let serviceId = (value2 as AnyObject).value(forKey: "serviceId") as! String
-                let userId = (value2 as AnyObject).value(forKey: "userId") as! String
-                let userPhone = (value2 as AnyObject).value(forKey: "userPhone") as! String
-                let userAddress = (value2 as AnyObject).value(forKey: "userAddress") as! String
-                let status = (value2 as AnyObject).value(forKey: "serviceStatus") as! String
-                let service = Service(type: type, name: name, description: description, userId: userId, userPhone: userPhone, userAddress: userAddress)
-                service.serviceId = serviceId
-                service.status = status
-                unclaimedServices.append(service)
+                let type = value?.value(forKey: "type") as! String
+                let email = value?.value(forKey: "email") as! String
+                let firstName = value?.value(forKey: "firstName") as! String
+                let lastName = value?.value(forKey: "lastName") as! String
+                let userId = value?.value(forKey: "userId") as! String
+                let password = value?.value(forKey: "password") as! String
+                user = User(email: email, firstName: firstName, lastName: lastName, password: password, type: type, userId: userId)
             }
-            }
-            })
+        })
         { (error) in
             print(error.localizedDescription)
         }
-        return true
+    }
+    
+    
+    class func loadUnclimedServicesData(){
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("users").child(userId).child("services").child("listOfUnclimedServices").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            print(value?.allKeys ?? "")
+            if(value != nil){
+                for serviceId in (value?.allValues)!{
+                    print (serviceId)
+                    user.listOfUnclimedServices.append(serviceId as! String)
+                }
+            }
+            })
+            { (error) in
+                print(error.localizedDescription)
+            }
+    }
+    
+    class func loadInProgressServicesData(){
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("users").child(userId).child("services").child("listOfInProgressServices").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            print(value?.allKeys ?? "")
+            if(value != nil){
+                for serviceId in (value?.allValues)!{
+                    print (serviceId)
+                    user.listOfInProgressServices.append(serviceId as! String)
+                }
+            }
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    class func loadCompleteServicesData(){
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("users").child(userId).child("services").child("listOfCompleteServices").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            print(value?.allKeys ?? "")
+            if(value != nil){
+                for serviceId in (value?.allValues)!{
+                    print (serviceId)
+                    user.listOfCompleteServices.append(serviceId as! String)
+                }
+            }
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    class func loadOffersData(){
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("users").child(userId).child("services").child("listOfOffers").observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            print(value?.allKeys ?? "")
+            if(value != nil){
+                for serviceId in (value?.allValues)!{
+                    print (serviceId)
+                    user.listOfOffers.append(serviceId as! String)
+                }
+            }
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    class func loadServices(){
+        
+        for unclimedServiceId in user.listOfUnclimedServices{
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("unclaimed services").child(unclimedServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                print(value?.allKeys ?? "")
+                if(value != nil){
+                    let type = value?.value(forKey: "type") as! String
+                    let name = value?.value(forKey: "name") as! String
+                    let description = value?.value(forKey: "description") as! String
+                    let serviceId = value?.value(forKey: "serviceId") as! String
+                    let userId = value?.value(forKey: "userId") as! String
+                    let userPhone = value?.value(forKey: "userPhone") as! String
+                    let userAddress = value?.value(forKey: "userAddress") as! String
+                    let status = value?.value(forKey: "status") as! String
+
+                    unclaimedServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, status: status, userPhone: userPhone, userAddress: userAddress))
+                }
+            })
+            { (error) in
+                print(error.localizedDescription)
+            }
+        }
+        
+        for inProgressServiceId in user.listOfInProgressServices{
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("in progress services").child(inProgressServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                print(value?.allKeys ?? "")
+                if(value != nil){
+                    let type = value?.value(forKey: "type") as! String
+                    let name = value?.value(forKey: "name") as! String
+                    let description = value?.value(forKey: "description") as! String
+                    let serviceId = value?.value(forKey: "serviceId") as! String
+                    let userId = value?.value(forKey: "userId") as! String
+                    let userPhone = value?.value(forKey: "userPhone") as! String
+                    let userAddress = value?.value(forKey: "userAddress") as! String
+                    let status = value?.value(forKey: "status") as! String
+                    
+                    inProgressServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, status: status, userPhone: userPhone, userAddress: userAddress))
+                }
+            })
+            { (error) in
+                print(error.localizedDescription)
+            }
+        }
+        
+        for completeServiceId in user.listOfCompleteServices{
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("complete services").child(completeServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                print(value?.allKeys ?? "")
+                if(value != nil){
+                    let type = value?.value(forKey: "type") as! String
+                    let name = value?.value(forKey: "name") as! String
+                    let description = value?.value(forKey: "description") as! String
+                    let serviceId = value?.value(forKey: "serviceId") as! String
+                    let userId = value?.value(forKey: "userId") as! String
+                    let userPhone = value?.value(forKey: "userPhone") as! String
+                    let userAddress = value?.value(forKey: "userAddress") as! String
+                    let status = value?.value(forKey: "status") as! String
+                    
+                    completeServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, status: status, userPhone: userPhone, userAddress: userAddress))
+                }
+            })
+            { (error) in
+                print(error.localizedDescription)
+            }
+        }
+        
+        
+        
     }
     
     

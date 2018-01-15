@@ -19,13 +19,13 @@ class Service{
     var userAddress : String
     var status: String
 
-    init(type: String, name: String, description: String, userId: String, userPhone: String, userAddress: String) {
+    init(type: String, name: String, description: String, serviceId: String, userId: String, status: String, userPhone: String, userAddress: String) {
         self.type = type
         self.name = name
         self.description = description
-        self.serviceId = ""
+        self.serviceId = serviceId
         self.userId = userId
-        self.status = "unclaimed"
+        self.status = status
         self.userPhone = userPhone
         self.userAddress = userAddress
         

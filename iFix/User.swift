@@ -16,7 +16,10 @@ class User{
     var password: String
     var type: String
     var userId: String
-
+    var listOfUnclimedServices: [String]
+    var listOfInProgressServices: [String]
+    var listOfCompleteServices: [String]
+    var listOfOffers: [String]
     
     init(email: String, firstName: String, lastName: String, password: String, type: String, userId: String) {
         self.email = email
@@ -25,8 +28,22 @@ class User{
         self.password = password
         self.type = type
         self.userId = userId
-
-
+        self.listOfUnclimedServices = []
+        self.listOfInProgressServices = []
+        self.listOfCompleteServices = []
+        self.listOfOffers = []
+    }
+    init() {
+        self.email = ""
+        self.firstName = ""
+        self.lastName = ""
+        self.password = ""
+        self.type = ""
+        self.userId = ""
+        self.listOfUnclimedServices = []
+        self.listOfInProgressServices = []
+        self.listOfCompleteServices = []
+        self.listOfOffers = []
     }
     
 }

@@ -57,7 +57,6 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                     }
                     if let u = user {
                         let reqularUser: User = User(email: self.emailTextField.text! ,firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: "User", userId: u.uid)
-                        
                         self.saveUserInDatabase(user: reqularUser)
                         self.performSegue(withIdentifier: "GoSignIn", sender: nil)
                     }

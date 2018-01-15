@@ -16,6 +16,7 @@
 		29541E0E2009ADC600935CDC /* DataCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29541E0D2009ADC600935CDC /* DataCurrentUser.swift */; };
 		295A287C2009865A00530037 /* ServiceRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295A287B2009865A00530037 /* ServiceRequestViewController.swift */; };
 		7D044D1520097AAF0063BCBE /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D044D1420097AAF0063BCBE /* ServiceProvider.swift */; };
+		7D044D53200C65080063BCBE /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D044D52200C65080063BCBE /* RandomGenerator.swift */; };
 		7D611BFF1FFD7EDA0015CF35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D611BFE1FFD7EDA0015CF35 /* AppDelegate.swift */; };
 		7D611C011FFD7EDA0015CF35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D611C001FFD7EDA0015CF35 /* ViewController.swift */; };
 		7D611C041FFD7EDB0015CF35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D611C021FFD7EDB0015CF35 /* Main.storyboard */; };
@@ -62,6 +63,7 @@
 		34FCCCAD11003693D6755753 /* Pods-iFixTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFixTests/Pods-iFixTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C9C20EC513831B95AF5B0D2 /* Pods-iFixUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFixUITests/Pods-iFixUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7D044D1420097AAF0063BCBE /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		7D044D52200C65080063BCBE /* RandomGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
 		7D611BFB1FFD7EDA0015CF35 /* iFix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D611BFE1FFD7EDA0015CF35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D611C001FFD7EDA0015CF35 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				29541E072009940A00935CDC /* HistoryViewController.swift */,
 				29541E03200993BD00935CDC /* OffersViewController.swift */,
 				295A287B2009865A00530037 /* ServiceRequestViewController.swift */,
+				7D044D52200C65080063BCBE /* RandomGenerator.swift */,
 				7DCA25D71FFDBCA800917C12 /* SignUpViewController.swift */,
 				7DCA25DB1FFDC9D600917C12 /* User.swift */,
 				29541E092009971700935CDC /* Service.swift */,
@@ -515,6 +518,7 @@
 				7DCA25D81FFDBCA800917C12 /* SignUpViewController.swift in Sources */,
 				7D611C011FFD7EDA0015CF35 /* ViewController.swift in Sources */,
 				7D044D1520097AAF0063BCBE /* ServiceProvider.swift in Sources */,
+				7D044D53200C65080063BCBE /* RandomGenerator.swift in Sources */,
 				29541E0E2009ADC600935CDC /* DataCurrentUser.swift in Sources */,
 				295A287C2009865A00530037 /* ServiceRequestViewController.swift in Sources */,
 				7DCA25DC1FFDC9D600917C12 /* User.swift in Sources */,

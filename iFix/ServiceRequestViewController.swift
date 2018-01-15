@@ -30,23 +30,24 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
             activityIndicatorView.isHidden = false
             activityIndicatorView.startAnimating()
             let uid = Auth.auth().currentUser?.uid
-            let service = Service(type: type, name: serviceName.text!, description: serviceDescription.text!, userId: uid!, userPhone: userPhoneNumber.text!, userAddress: userAddress.text!)
+            let service = Service(type: type, name: serviceName.text!, description: serviceDescription.text!, serviceId: RandomGenerator.randomServiceID(), userId: uid!, status: "unclaimed", userPhone: userPhoneNumber.text!, userAddress: userAddress.text!)
             
-            var ref: DatabaseReference!
-            ref = Database.database().reference().child("services").child(service.type).childByAutoId()
-            let key = ref.key
+            var ref1: DatabaseReference!
+            ref1 = Database.database().reference().child("unclaimed services").child(service.serviceId)
             
-            let service1 = ["type": service.type, "name": service.name, "description": service.description,"userId": service.userId,"userPhone":service.userPhone,"userAddress": service.userAddress, "serviceStatus": service.status, "serviceId": key] as [String : Any]
-            ref.setValue(service1)
-            ref.setValue(service1, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
-                print("Error")
-                })
-            ref.root.child("users").child(service.userId).child("services").child(service.status).child(key).setValue(service1, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
-                print("inside the write")
-                if(DataCurrentUser.loadUnclimedData()){
-                    self.showAlert()
-                }
-            })
+            let service1 = ["type": service.type, "name": service.name, "description": service.description,"userId": service.userId,"userPhone":service.userPhone,"userAddress": service.userAddress, "status": service.status, "serviceId": service.serviceId] as [String : Any]
+            ref1.setValue(service1)
+//            ref.setValue(service1, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
+//                print("Error")
+//                })
+            
+           var ref2: DatabaseReference!
+           ref2 = Database.database().reference().child("users").child(uid!).child("listOfUnclimedServices").child("\(DataCurrentUser.user.listOfUnclimedServices.count)")
+            ref2.setValue(service.serviceId)
+            DataCurrentUser.user.listOfUnclimedServices.append(service.serviceId)
+            //DataCurrentUser.loadServices()
+            DataCurrentUser.unclaimedServices.append(service)
+            showAlertSubmitted()
             activityIndicatorView.stopAnimating()
             
         }
@@ -78,7 +79,7 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
         present(alertController, animated: true, completion: nil)
     }
     
-    func showAlert(){
+    func showAlertSubmitted(){
         let title = "Submitted"
         let message = "Your request has been submitted"
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

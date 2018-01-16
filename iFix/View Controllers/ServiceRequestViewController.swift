@@ -44,9 +44,9 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
             
             var ref2: DatabaseReference!
             ref2 = Database.database().reference()
-            ref2.child("users").child(uid!).child("listOfUnclaimedServices").child("\(DataCurrentUser.user.listOfUnclaimedServices.count)").setValue(service.serviceId)
+            ref2.child("users").child(uid!).child("listOfUnclaimedServices").child("\(DataCurrentUser.listOfUnclaimedServices.count)").setValue(service.serviceId)
             //print("The list before3 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
-            DataCurrentUser.user.listOfUnclaimedServices.append(service.serviceId)
+            DataCurrentUser.listOfUnclaimedServices.append(service.serviceId)
             //DataCurrentUser.updateListOfUnclaimedServices()
             //print("The list after3 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
 

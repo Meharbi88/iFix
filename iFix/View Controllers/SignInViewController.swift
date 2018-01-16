@@ -53,10 +53,11 @@ class SignInViewController: UIViewController {
                         if (value != nil){
                             self.type = value?.value(forKey: "type") as! String
                             if(self.type == "User"){
+                                DataCurrentUser.userType = "User"
                                 DataCurrentUser.userId = (Auth.auth().currentUser?.uid)!
                                 DataCurrentUser.loadCurrentUserData()
                                 DataCurrentUser.loadUnclaimedServicesData()
-                                DataCurrentUser.loadServices1()
+                                //DataCurrentUser.loadServices1()
                                 DataCurrentUser.loadInProgressServicesData()
                                 DataCurrentUser.loadCompleteServicesData()
                                 //self.showAlertSuccess()

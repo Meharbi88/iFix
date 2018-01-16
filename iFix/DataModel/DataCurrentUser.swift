@@ -12,12 +12,17 @@ import Firebase
 class DataCurrentUser: NSObject {
     
     static var userId : String = ""
+    static var userType: String = ""
     static var user : User = User()
     static var unclaimedServices : [Service] = []
     //static var offersServices : [Offer] = []
     static var inProgressServices : [Service] = []
     static var completeServices : [Service] = []
-    
+    static var listOfUnclaimedServices : [String] = []
+    static var listOfInProgressServices : [String] = []
+    static var listOfOffers : [String] = []
+    static var listOfCompleteServices : [String] = []
+
     class func loadCurrentUserData(){
         var ref: DatabaseReference!
         ref = Database.database().reference()
@@ -48,11 +53,9 @@ class DataCurrentUser: NSObject {
             let value = snapshot.value as? NSArray
             if(value != nil){
                 for serviceId in value!{
-                    user.listOfUnclaimedServices.append(serviceId as! String)
+                    listOfUnclaimedServices.append(serviceId as! String)
                 }
-                print("HH \(user.listOfUnclaimedServices)")
                 DataCurrentUser.loadServices1()
-                print("HH \(user.listOfUnclaimedServices)")
 
             }
             })
@@ -70,7 +73,7 @@ class DataCurrentUser: NSObject {
             if(value != nil){
                 for serviceId in value!{
                     print (serviceId)
-                    user.listOfInProgressServices.append(serviceId as! String)
+                    listOfInProgressServices.append(serviceId as! String)
                 }
                 DataCurrentUser.loadServices2()
             }
@@ -89,7 +92,7 @@ class DataCurrentUser: NSObject {
             if(value != nil){
                 for serviceId in value!{
                     print (serviceId)
-                    user.listOfCompleteServices.append(serviceId as! String)
+                    listOfCompleteServices.append(serviceId as! String)
                 }
                 DataCurrentUser.loadServices3()
             }
@@ -108,7 +111,7 @@ class DataCurrentUser: NSObject {
             print(value?.allKeys ?? "")
             if(value != nil){
                 for serviceId in (value?.allValues)!{
-                    user.listOfOffers.append(serviceId as! String)
+                    listOfOffers.append(serviceId as! String)
                 }
             }
         })
@@ -119,8 +122,8 @@ class DataCurrentUser: NSObject {
     
     class func loadServices1(){
         unclaimedServices = []
-        print("\(user.listOfUnclaimedServices.count)")
-        for unclaimedServiceId in user.listOfUnclaimedServices{
+        print("\(listOfUnclaimedServices.count)")
+        for unclaimedServiceId in listOfUnclaimedServices{
             var ref: DatabaseReference!
             ref = Database.database().reference()
             ref.child("unclaimed services").child(unclaimedServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -147,14 +150,14 @@ class DataCurrentUser: NSObject {
 
         
         
-        print("HH \(user.listOfUnclaimedServices)")
+        print("HH \(listOfUnclaimedServices)")
     }
     
     class func loadServices2(){
 
         inProgressServices = []
 
-        for inProgressServiceId in user.listOfInProgressServices{
+        for inProgressServiceId in listOfInProgressServices{
             var ref: DatabaseReference!
             ref = Database.database().reference()
             ref.child("in progress services").child(inProgressServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -188,7 +191,7 @@ class DataCurrentUser: NSObject {
     class func loadServices3(){
         completeServices = []
 
-        for completeServiceId in user.listOfCompleteServices{
+        for completeServiceId in listOfCompleteServices{
             var ref: DatabaseReference!
             ref = Database.database().reference()
             ref.child("complete services").child(completeServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -224,15 +227,15 @@ class DataCurrentUser: NSObject {
                 break;
             }
         }
-        print("The list before of unlcimed service are: \(user.listOfUnclaimedServices)")
+        print("The list before of unlcimed service are: \(listOfUnclaimedServices)")
 
-        for index in 0..<user.listOfUnclaimedServices.count {
-            if (user.listOfUnclaimedServices[index] == service.serviceId) {
-                user.listOfUnclaimedServices.remove(at: index)
+        for index in 0..<listOfUnclaimedServices.count {
+            if (listOfUnclaimedServices[index] == service.serviceId) {
+                listOfUnclaimedServices.remove(at: index)
                 break;
             }
         }
-        print("The list after of unlcimed service are: \(user.listOfUnclaimedServices)")
+        print("The list after of unlcimed service are: \(listOfUnclaimedServices)")
         DataCurrentUser.updateListOfUnclaimedServices()
         
     }
@@ -247,11 +250,11 @@ class DataCurrentUser: NSObject {
     class func updateListOfUnclaimedServices(){
         var ref2: DatabaseReference!
         ref2 = Database.database().reference()
-        ref2.child("users").child(user.userId).child("listOfUnclaimedServices").removeValue()
-        print("The count is: \(user.listOfUnclaimedServices.count)")
-        for index in 0..<user.listOfUnclaimedServices.count {
-            print("HI: \(index)+\(user.listOfUnclaimedServices[index])")
-            ref2.root.child("users").child(user.userId).child("listOfUnclaimedServices").child("\(index)").setValue(user.listOfUnclaimedServices[index])
+        ref2.child("users").child(userId).child("listOfUnclaimedServices").removeValue()
+        print("The count is: \(listOfUnclaimedServices.count)")
+        for index in 0..<listOfUnclaimedServices.count {
+            print("HI: \(index)+\(listOfUnclaimedServices[index])")
+            ref2.root.child("users").child(user.userId).child("listOfUnclaimedServices").child("\(index)").setValue(listOfUnclaimedServices[index])
             
         }
     }
@@ -259,7 +262,9 @@ class DataCurrentUser: NSObject {
     
     class func clear(){
         user = User()
+        userType = ""
         unclaimedServices = []
+        listOfUnclaimedServices = []
         // offersServices = []
         inProgressServices = []
         completeServices = []

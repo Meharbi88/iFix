@@ -165,28 +165,15 @@
 		7D611BFD1FFD7EDA0015CF35 /* iFix */ = {
 			isa = PBXGroup;
 			children = (
+				7DBEEB29200EA4EE00628669 /* ID Generators */,
+				7DBEEB28200EA49600628669 /* View Controllers */,
+				7DBEEB27200EA44500628669 /* Service Provider Cells */,
+				7DBEEB26200EA41000628669 /* User Cells */,
+				7DBEEB25200EA3A800628669 /* DataModel */,
 				7DAD311E1FFF10130092450C /* GoogleService-Info.plist */,
 				7D611BFE1FFD7EDA0015CF35 /* AppDelegate.swift */,
 				7D611C001FFD7EDA0015CF35 /* ViewController.swift */,
 				7D611C021FFD7EDB0015CF35 /* Main.storyboard */,
-				29541E0B2009A98F00935CDC /* UnclaimedServicesTableViewCell.swift */,
-				29649286200C7D4B00A6CD05 /* InProgressTableViewCell.swift */,
-				29649288200C7D6500A6CD05 /* OfferTableViewCell.swift */,
-				2964928A200C7D7900A6CD05 /* CompleteTableViewCell.swift */,
-				29541E05200993F200935CDC /* InProgressViewController.swift */,
-				29541E072009940A00935CDC /* HistoryViewController.swift */,
-				29541E03200993BD00935CDC /* OffersViewController.swift */,
-				295A287B2009865A00530037 /* ServiceRequestViewController.swift */,
-				7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */,
-				7D044D52200C65080063BCBE /* RandomGenerator.swift */,
-				7DCA25D71FFDBCA800917C12 /* SignUpViewController.swift */,
-				7DCA25DB1FFDC9D600917C12 /* User.swift */,
-				29541E092009971700935CDC /* Service.swift */,
-				7D044D1420097AAF0063BCBE /* ServiceProvider.swift */,
-				7DCA25D91FFDBCB700917C12 /* SignInViewController.swift */,
-				7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */,
-				29541E0D2009ADC600935CDC /* DataCurrentUser.swift */,
-				29AD1E2F200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift */,
 				7D611C051FFD7EDB0015CF35 /* Assets.xcassets */,
 				7D611C071FFD7EDB0015CF35 /* LaunchScreen.storyboard */,
 				7D611C0A1FFD7EDB0015CF35 /* Info.plist */,
@@ -210,6 +197,59 @@
 				7D611C201FFD7EDB0015CF35 /* Info.plist */,
 			);
 			path = iFixUITests;
+			sourceTree = "<group>";
+		};
+		7DBEEB25200EA3A800628669 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				7DCA25DB1FFDC9D600917C12 /* User.swift */,
+				29541E0D2009ADC600935CDC /* DataCurrentUser.swift */,
+				29541E092009971700935CDC /* Service.swift */,
+				7D044D1420097AAF0063BCBE /* ServiceProvider.swift */,
+				7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		7DBEEB26200EA41000628669 /* User Cells */ = {
+			isa = PBXGroup;
+			children = (
+				29649286200C7D4B00A6CD05 /* InProgressTableViewCell.swift */,
+				29541E0B2009A98F00935CDC /* UnclaimedServicesTableViewCell.swift */,
+				29649288200C7D6500A6CD05 /* OfferTableViewCell.swift */,
+				2964928A200C7D7900A6CD05 /* CompleteTableViewCell.swift */,
+			);
+			path = "User Cells";
+			sourceTree = "<group>";
+		};
+		7DBEEB27200EA44500628669 /* Service Provider Cells */ = {
+			isa = PBXGroup;
+			children = (
+				29AD1E2F200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift */,
+			);
+			path = "Service Provider Cells";
+			sourceTree = "<group>";
+		};
+		7DBEEB28200EA49600628669 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				29541E05200993F200935CDC /* InProgressViewController.swift */,
+				29541E072009940A00935CDC /* HistoryViewController.swift */,
+				29541E03200993BD00935CDC /* OffersViewController.swift */,
+				295A287B2009865A00530037 /* ServiceRequestViewController.swift */,
+				7DCA25D71FFDBCA800917C12 /* SignUpViewController.swift */,
+				7DCA25D91FFDBCB700917C12 /* SignInViewController.swift */,
+				7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		7DBEEB29200EA4EE00628669 /* ID Generators */ = {
+			isa = PBXGroup;
+			children = (
+				7D044D52200C65080063BCBE /* RandomGenerator.swift */,
+			);
+			path = "ID Generators";
 			sourceTree = "<group>";
 		};
 		BCDDC42F6E97C43522BFE84F /* Frameworks */ = {

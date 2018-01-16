@@ -19,7 +19,7 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     var serviceId : String = "HIUserHomeViewController"
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(DataCurrentUser.user.type=="User"){
+        if(DataCurrentUser.userType=="User"){
             return DataCurrentUser.unclaimedServices.count
         }else{
             return DataCurrentServiceProvider.unclaimedServices.count
@@ -27,7 +27,7 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if(DataCurrentUser.user.type=="User"){
+        if(DataCurrentUser.userType=="User"){
             let unclaimedCell = tableView.dequeueReusableCell(withIdentifier: "unclaimedServicesCell", for: indexPath) as! UnclaimedServicesTableViewCell
             unclaimedCell.serviceName.text = DataCurrentUser.unclaimedServices[indexPath.row].name
             unclaimedCell.serviceType.text = DataCurrentUser.unclaimedServices[indexPath.row].type
@@ -53,7 +53,7 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewDidAppear(_ animated: Bool) {
         myTable.rowHeight = 220
-        if(DataCurrentUser.user.type=="User"){
+        if(DataCurrentUser.userType=="User"){
             myTable.rowHeight = 140
             topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
         }
@@ -81,10 +81,10 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func deleteService(service : Service) {
-        print("The list before2 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
+        print("The list before2 of unlcimed service are: \(DataCurrentUser.listOfUnclaimedServices)")
         DataCurrentUser.deleteUnclaimedServiceLocally(service: service)
         DataCurrentUser.deleteUnclaimedServiceDatabase(service: service)
-        print("The list after2 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
+        print("The list after2 of unlcimed service are: \(DataCurrentUser.listOfUnclaimedServices)")
         DataCurrentUser.updateListOfUnclaimedServices()
 
 //        updateDatabase()

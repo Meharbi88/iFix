@@ -68,35 +68,6 @@ class DataCurrentServiceProvider: NSObject {
             print(error.localizedDescription)
         }
     }
-  
-    
-//    class func loadServices1(){
-//        unclaimedServices = []
-//        print("\(user.listOfUnclaimedServices.count)")
-//        for unclaimedServiceId in user.listOfUnclaimedServices{
-//            var ref: DatabaseReference!
-//            ref = Database.database().reference()
-//            ref.child("unclaimed services").child(unclaimedServiceId).observeSingleEvent(of: .value, with: { (snapshot) in
-//                // Get user value
-//                let value = snapshot.value as? NSDictionary
-//                if(value != nil){
-//                    let type = value?.value(forKey: "type") as! String
-//                    let name = value?.value(forKey: "name") as! String
-//                    let description = value?.value(forKey: "description") as! String
-//                    let serviceId = value?.value(forKey: "serviceId") as! String
-//                    let userId = value?.value(forKey: "userId") as! String
-//                    let userPhone = value?.value(forKey: "userPhone") as! String
-//                    let userAddress = value?.value(forKey: "userAddress") as! String
-//                    let status = value?.value(forKey: "status") as! String
-//                    let serviceProviderId = value?.value(forKey: "serviceProviderId") as! String
-//                    unclaimedServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, serviceProviderId: serviceProviderId, status: status, userPhone: userPhone, userAddress: userAddress))
-//                }
-//
-//            })
-//            { (error) in
-//                print(error.localizedDescription)
-//            }
-//        }
     
         
     class func clear(){

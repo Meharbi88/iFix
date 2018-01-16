@@ -115,6 +115,7 @@ class DataCurrentUser: NSObject {
     }
     
     class func loadServices1(){
+        unclaimedServices = []
         print("\(user.listOfUnclaimedServices.count)")
         for unclaimedServiceId in user.listOfUnclaimedServices{
             var ref: DatabaseReference!
@@ -131,8 +132,8 @@ class DataCurrentUser: NSObject {
                     let userPhone = value?.value(forKey: "userPhone") as! String
                     let userAddress = value?.value(forKey: "userAddress") as! String
                     let status = value?.value(forKey: "status") as! String
-
-                    unclaimedServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, status: status, userPhone: userPhone, userAddress: userAddress))
+                    let serviceProviderId = value?.value(forKey: "serviceProviderId") as! String
+                    unclaimedServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, serviceProviderId: serviceProviderId, status: status, userPhone: userPhone, userAddress: userAddress))
                 }
  
             })
@@ -148,7 +149,8 @@ class DataCurrentUser: NSObject {
     
     class func loadServices2(){
 
-        
+        inProgressServices = []
+
         for inProgressServiceId in user.listOfInProgressServices{
             var ref: DatabaseReference!
             ref = Database.database().reference()
@@ -164,8 +166,9 @@ class DataCurrentUser: NSObject {
                     let userPhone = value?.value(forKey: "userPhone") as! String
                     let userAddress = value?.value(forKey: "userAddress") as! String
                     let status = value?.value(forKey: "status") as! String
+                    let serviceProviderId = value?.value(forKey: "serviceProviderId") as! String
                     
-                    inProgressServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, status: status, userPhone: userPhone, userAddress: userAddress))
+                    inProgressServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, serviceProviderId: serviceProviderId, status: status, userPhone: userPhone, userAddress: userAddress))
                 }
             })
             { (error) in
@@ -180,6 +183,8 @@ class DataCurrentUser: NSObject {
     }
     
     class func loadServices3(){
+        completeServices = []
+
         for completeServiceId in user.listOfCompleteServices{
             var ref: DatabaseReference!
             ref = Database.database().reference()
@@ -195,8 +200,9 @@ class DataCurrentUser: NSObject {
                     let userPhone = value?.value(forKey: "userPhone") as! String
                     let userAddress = value?.value(forKey: "userAddress") as! String
                     let status = value?.value(forKey: "status") as! String
+                    let serviceProviderId = value?.value(forKey: "serviceProviderId") as! String
                     
-                    completeServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, status: status, userPhone: userPhone, userAddress: userAddress))
+                    completeServices.append(Service(type: type, name: name, description: description, serviceId: serviceId, userId: userId, serviceProviderId: serviceProviderId, status: status, userPhone: userPhone, userAddress: userAddress))
                 }
             })
             { (error) in

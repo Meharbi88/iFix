@@ -11,10 +11,10 @@ import Firebase
 
 class ServiceProviderHomeViewController: UIViewController {
 
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var data: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        label.text = Auth.auth().currentUser?.email
+        data.text = Auth.auth().currentUser?.email
         // Do any additional setup after loading the view.
     }
 
@@ -23,6 +23,10 @@ class ServiceProviderHomeViewController: UIViewController {
         
         
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        data.text = DataCurrentServiceProvider.unclaimedServices[0].serviceId
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

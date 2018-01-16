@@ -44,12 +44,6 @@ class SignInViewController: UIViewController {
                 if let u1 = user {
                     let id = u1.uid
                     var ref: DatabaseReference!
-                    DataCurrentUser.userId = (Auth.auth().currentUser?.uid)!
-                    DataCurrentUser.loadCurrentUserData()
-                    DataCurrentUser.loadUnclaimedServicesData()
-                    DataCurrentUser.loadServices1()
-                    DataCurrentUser.loadInProgressServicesData()
-                    DataCurrentUser.loadCompleteServicesData()
                     ref = Database.database().reference()
                     ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
@@ -57,11 +51,20 @@ class SignInViewController: UIViewController {
                         if (value != nil){
                             let type = value?.value(forKey: "type") as! String
                             if(type == "User"){
+                                DataCurrentUser.userId = (Auth.auth().currentUser?.uid)!
+                                DataCurrentUser.loadCurrentUserData()
+                                DataCurrentUser.loadUnclaimedServicesData()
+                                DataCurrentUser.loadServices1()
+                                DataCurrentUser.loadInProgressServicesData()
+                                DataCurrentUser.loadCompleteServicesData()
                                 //self.showAlertSuccess()
                                 self.activityIndicatorView.stopAnimating()
                                 self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
                             }
                         }else{
+                            DataCurrentServiceProvider.serviceProviderId = (Auth.auth().currentUser?.uid)!
+                            DataCurrentServiceProvider.loadCurrentServiceProviderData()
+                            DataCurrentServiceProvider.loadUnclaimedServicesData()
                             self.activityIndicatorView.stopAnimating()
                             self.performSegue(withIdentifier: "GoHomeServiceProvider", sender: nil)
                         }

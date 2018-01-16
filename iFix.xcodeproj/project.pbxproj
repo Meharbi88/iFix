@@ -33,6 +33,7 @@
 		7DCA25DC1FFDC9D600917C12 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA25DB1FFDC9D600917C12 /* User.swift */; };
 		7DCA25DE1FFDEFB900917C12 /* UserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */; };
 		7DCA25E01FFDEFD100917C12 /* ServiceProviderHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA25DF1FFDEFD100917C12 /* ServiceProviderHomeViewController.swift */; };
+		7DD1735D200D6074009E42FD /* DataCurrentServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */; };
 		9983BC5F7B90693C786D82F5 /* Pods_iFixTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7361E48A7AD21746C6E73A /* Pods_iFixTests.framework */; };
 		CD44310A8B1EA18E7540407A /* Pods_iFix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826303C7D31F4CA7A74F339C /* Pods_iFix.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		7DCA25DB1FFDC9D600917C12 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeViewController.swift; sourceTree = "<group>"; };
 		7DCA25DF1FFDEFD100917C12 /* ServiceProviderHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderHomeViewController.swift; sourceTree = "<group>"; };
+		7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCurrentServiceProvider.swift; sourceTree = "<group>"; };
 		826303C7D31F4CA7A74F339C /* Pods_iFix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A166FD57F354CBB0FE479401 /* Pods-iFixTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iFixTests/Pods-iFixTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD7361E48A7AD21746C6E73A /* Pods_iFixTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFixTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				29541E072009940A00935CDC /* HistoryViewController.swift */,
 				29541E03200993BD00935CDC /* OffersViewController.swift */,
 				295A287B2009865A00530037 /* ServiceRequestViewController.swift */,
+				7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */,
 				7D044D52200C65080063BCBE /* RandomGenerator.swift */,
 				7DCA25D71FFDBCA800917C12 /* SignUpViewController.swift */,
 				7DCA25DB1FFDC9D600917C12 /* User.swift */,
@@ -523,6 +526,7 @@
 				29541E0A2009971700935CDC /* Service.swift in Sources */,
 				29649287200C7D4B00A6CD05 /* InProgressTableViewCell.swift in Sources */,
 				7DCA25DA1FFDBCB700917C12 /* SignInViewController.swift in Sources */,
+				7DD1735D200D6074009E42FD /* DataCurrentServiceProvider.swift in Sources */,
 				2964928B200C7D7900A6CD05 /* CompleteTableViewCell.swift in Sources */,
 				29541E06200993F200935CDC /* InProgressViewController.swift in Sources */,
 				29541E082009940A00935CDC /* HistoryViewController.swift in Sources */,

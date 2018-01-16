@@ -14,7 +14,7 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
-    
+    var type: String = ""
     @IBOutlet weak var passwordTextField: UITextField!
     
     var userType: String = ""
@@ -24,13 +24,15 @@ class SignInViewController: UIViewController {
         emailTextField.text = "meharbi88@gmail.com"
         passwordTextField.text = "1804947"
         logInButton.isEnabled = true;
+        DataCurrentUser.userId = ""
+        DataCurrentServiceProvider.serviceProviderId = ""
         // Do any additional setup after loading the view.
     }
 
     @IBAction func logIn(_ sender: Any) {
         
         if(emailTextField.text == "" || passwordTextField.text == ""){
-            showAlert()
+            showAlertEmptyField()
         }else{
             logInButton.isEnabled = false;
             activityIndicatorView.startAnimating()
@@ -49,8 +51,8 @@ class SignInViewController: UIViewController {
                         // Get user value
                         let value = snapshot.value as? NSDictionary
                         if (value != nil){
-                            let type = value?.value(forKey: "type") as! String
-                            if(type == "User"){
+                            self.type = value?.value(forKey: "type") as! String
+                            if(self.type == "User"){
                                 DataCurrentUser.userId = (Auth.auth().currentUser?.uid)!
                                 DataCurrentUser.loadCurrentUserData()
                                 DataCurrentUser.loadUnclaimedServicesData()
@@ -59,14 +61,15 @@ class SignInViewController: UIViewController {
                                 DataCurrentUser.loadCompleteServicesData()
                                 //self.showAlertSuccess()
                                 self.activityIndicatorView.stopAnimating()
-                                self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
+                                self.performSegue(withIdentifier: "GoHomeUser", sender: self.type)
                             }
                         }else{
                             DataCurrentServiceProvider.serviceProviderId = (Auth.auth().currentUser?.uid)!
                             DataCurrentServiceProvider.loadCurrentServiceProviderData()
                             DataCurrentServiceProvider.loadUnclaimedServicesData()
                             self.activityIndicatorView.stopAnimating()
-                            self.performSegue(withIdentifier: "GoHomeServiceProvider", sender: nil)
+                            self.performSegue(withIdentifier: "GoHomeUser",sender: nil)
+                            //self.performSegue(withIdentifier: "GoHomeServiceProvider", sender: nil)
                         }
                     }) { (error) in
                         print(error.localizedDescription)
@@ -94,7 +97,7 @@ class SignInViewController: UIViewController {
     }
     
     
-    func showAlert(){
+    func showAlertEmptyField(){
         
         let title = "Empty Field"
         let message = "Sorry, You have entered an empty field please fill in all the required fields"

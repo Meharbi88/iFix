@@ -99,6 +99,12 @@ class DataCurrentServiceProvider: NSObject {
 //        }
     
         
-        
+    class func clear(){
+        serviceProvider = ServiceProvider()
+        unclaimedServices = []
+        // offersServices = []
+        inProgressServices = []
+        completeServices = []
+    }
         
 }

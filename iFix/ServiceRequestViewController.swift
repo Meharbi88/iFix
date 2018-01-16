@@ -37,14 +37,19 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
             
             let service1 = ["type": service.type, "name": service.name, "description": service.description,"userId": service.userId, "serviceProviderId": service.serviceProviderId, "userPhone":service.userPhone,"userAddress": service.userAddress, "status": service.status, "serviceId": service.serviceId] as [String : Any]
             ref1.setValue(service1)
+            
 //            ref.setValue(service1, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
 //                print("Error")
 //                })
             
-           var ref2: DatabaseReference!
-           ref2 = Database.database().reference().child("users").child(uid!).child("listOfUnclaimedServices").child("\(DataCurrentUser.user.listOfUnclaimedServices.count)")
-            ref2.setValue(service.serviceId)
+            var ref2: DatabaseReference!
+            ref2 = Database.database().reference()
+            ref2.child("users").child(uid!).child("listOfUnclaimedServices").child("\(DataCurrentUser.user.listOfUnclaimedServices.count)").setValue(service.serviceId)
+            //print("The list before3 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
             DataCurrentUser.user.listOfUnclaimedServices.append(service.serviceId)
+            //DataCurrentUser.updateListOfUnclaimedServices()
+            //print("The list after3 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
+
             //DataCurrentUser.loadServices()
             DataCurrentUser.unclaimedServices.append(service)
             showAlertSubmitted()

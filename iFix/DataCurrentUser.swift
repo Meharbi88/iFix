@@ -50,7 +50,10 @@ class DataCurrentUser: NSObject {
                 for serviceId in value!{
                     user.listOfUnclaimedServices.append(serviceId as! String)
                 }
+                print("HH \(user.listOfUnclaimedServices)")
                 DataCurrentUser.loadServices1()
+                print("HH \(user.listOfUnclaimedServices)")
+
             }
             })
             { (error) in
@@ -144,7 +147,7 @@ class DataCurrentUser: NSObject {
 
         
         
-        
+        print("HH \(user.listOfUnclaimedServices)")
     }
     
     class func loadServices2(){
@@ -212,6 +215,54 @@ class DataCurrentUser: NSObject {
         
         
         
+    }
+    
+    class func deleteUnclaimedServiceLocally(service : Service){
+        for index in 0..<unclaimedServices.count {
+            if (unclaimedServices[index].serviceId == service.serviceId) {
+                unclaimedServices.remove(at: index)
+                break;
+            }
+        }
+        print("The list before of unlcimed service are: \(user.listOfUnclaimedServices)")
+
+        for index in 0..<user.listOfUnclaimedServices.count {
+            if (user.listOfUnclaimedServices[index] == service.serviceId) {
+                user.listOfUnclaimedServices.remove(at: index)
+                break;
+            }
+        }
+        print("The list after of unlcimed service are: \(user.listOfUnclaimedServices)")
+        DataCurrentUser.updateListOfUnclaimedServices()
+        
+    }
+    class func deleteUnclaimedServiceDatabase(service : Service){
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        ref.child("unclaimed services").child(service.serviceId).removeValue()
+        
+    }
+    
+    class func updateListOfUnclaimedServices(){
+        var ref2: DatabaseReference!
+        ref2 = Database.database().reference()
+        ref2.child("users").child(user.userId).child("listOfUnclaimedServices").removeValue()
+        print("The count is: \(user.listOfUnclaimedServices.count)")
+        for index in 0..<user.listOfUnclaimedServices.count {
+            print("HI: \(index)+\(user.listOfUnclaimedServices[index])")
+            ref2.root.child("users").child(user.userId).child("listOfUnclaimedServices").child("\(index)").setValue(user.listOfUnclaimedServices[index])
+            
+        }
+    }
+    
+    
+    class func clear(){
+        user = User()
+        unclaimedServices = []
+        // offersServices = []
+        inProgressServices = []
+        completeServices = []
     }
     
 }

@@ -17,6 +17,7 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var requestAService: UIBarButtonItem!
    
     var serviceId : String = "HIUserHomeViewController"
+    var refreshController = UIRefreshControl()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(DataCurrentUser.userType=="User"){
@@ -49,6 +50,15 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         myTable.reloadData()
+        myTable.refreshControl = self.refreshController
+        self.refreshController.attributedTitle = NSAttributedString(string: "Last update was on \(NSDate())")
+        self.refreshController.backgroundColor = UIColor.lightGray
+        self.refreshController.addTarget(self, action: #selector(UserHomeViewController.didRefresh), for: .valueChanged)
+    }
+    
+    @objc func didRefresh(){
+
+        self.refreshController.endRefreshing()
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -687,7 +687,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" id="rdL-UA-dc5">
                                             <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="Are-we-ee6">
-                                                <rect key="frame" x="305" y="11" width="22" height="22"/>
+                                                <rect key="frame" x="337" y="11" width="22" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <connections>
                                                     <segue destination="wTQ-Lj-4gx" kind="showDetail" id="9sj-aB-mX9"/>

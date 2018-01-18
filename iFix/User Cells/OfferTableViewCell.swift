@@ -9,7 +9,14 @@
 import UIKit
 
 class OfferTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var serviceName: UILabel!
+    
+    @IBOutlet weak var serviceType: UILabel!
+    
+    @IBOutlet weak var price: UILabel!
+    
+    @IBOutlet weak var declineOffer: UIButton!
+    @IBOutlet weak var acceptOffer: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

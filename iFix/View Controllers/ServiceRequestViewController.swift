@@ -30,28 +30,11 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
             activityIndicatorView.isHidden = false
             activityIndicatorView.startAnimating()
             let uid = Auth.auth().currentUser?.uid
-            let service = Service(type: type, name: serviceName.text!, description: serviceDescription.text!, serviceId: RandomGenerator.randomServiceID(), userId: uid!, serviceProviderId: "", status: "unclaimed", userPhone: userPhoneNumber.text!, userAddress: userAddress.text!)
-            
-            var ref1: DatabaseReference!
-            ref1 = Database.database().reference().child("unclaimed services").child(service.serviceId)
-            
-            let service1 = ["type": service.type, "name": service.name, "description": service.description,"userId": service.userId, "serviceProviderId": service.serviceProviderId, "userPhone":service.userPhone,"userAddress": service.userAddress, "status": service.status, "serviceId": service.serviceId] as [String : Any]
-            ref1.setValue(service1)
-            
-//            ref.setValue(service1, withCompletionBlock: { (error: Error?, ref: DatabaseReference) in
-//                print("Error")
-//                })
-            
-            var ref2: DatabaseReference!
-            ref2 = Database.database().reference()
-            ref2.child("users").child(uid!).child("listOfUnclaimedServices").child("\(DataCurrentUser.listOfUnclaimedServices.count)").setValue(service.serviceId)
-            //print("The list before3 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
-            DataCurrentUser.listOfUnclaimedServices.append(service.serviceId)
-            //DataCurrentUser.updateListOfUnclaimedServices()
-            //print("The list after3 of unlcimed service are: \(DataCurrentUser.user.listOfUnclaimedServices)")
+            let service = Service(type: type, name: serviceName.text!, description: serviceDescription.text!, serviceId: RandomGenerator.randomServiceID(), userId: uid!, serviceProviderId: "", status: "unclaimed", userPhone: userPhoneNumber.text!, userAddress: userAddress.text!, offerId: "")
+        
+            WriteData.writeUnclaimedService(service: service)
 
-            //DataCurrentUser.loadServices()
-            DataCurrentUser.unclaimedServices.append(service)
+            //DataCurrentUser.unclaimedServices.append(service)
             showAlertSubmitted()
             activityIndicatorView.stopAnimating()
             

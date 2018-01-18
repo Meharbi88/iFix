@@ -10,14 +10,14 @@ import UIKit
 import Firebase
 
 class SignInViewController: UIViewController {
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
-    var type: String = ""
     @IBOutlet weak var passwordTextField: UITextField!
     
     var userType: String = ""
+    var type: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +37,9 @@ class SignInViewController: UIViewController {
             logInButton.isEnabled = false;
             activityIndicatorView.startAnimating()
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!, completion: { (user, error) in
-                
                 if let e = error {
                     self.showAlertWrongInfo(description: e.localizedDescription)
-                    
                 }
-                
                 if let u1 = user {
                     let id = u1.uid
                     var ref: DatabaseReference!
@@ -50,29 +47,23 @@ class SignInViewController: UIViewController {
                     ref.child("users").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
                         // Get user value
                         let value = snapshot.value as? NSDictionary
-                        if (value != nil){
-                            self.type = value?.value(forKey: "type") as! String
-                            if(self.type == "User"){
-                                DataCurrentUser.userType = "User"
-                                DataCurrentUser.userId = (Auth.auth().currentUser?.uid)!
+                        if(value != nil){
+                            let type = value?.value(forKey: "type") as! String
+                            if(type == "User"){
+                                DataCurrentUser.userId = id
                                 DataCurrentUser.loadCurrentUserData()
-                                DataCurrentUser.loadUnclaimedServicesData()
-                                //DataCurrentUser.loadServices1()
-                                DataCurrentUser.loadInProgressServicesData()
-                                DataCurrentUser.loadCompleteServicesData()
-                                //self.showAlertSuccess()
-                                self.activityIndicatorView.stopAnimating()
-                                self.performSegue(withIdentifier: "GoHomeUser", sender: self.type)
+
                             }
                         }else{
-                            DataCurrentServiceProvider.serviceProviderId = (Auth.auth().currentUser?.uid)!
-                            DataCurrentServiceProvider.loadCurrentServiceProviderData()
-                            DataCurrentServiceProvider.loadUnclaimedServicesData()
-                            self.activityIndicatorView.stopAnimating()
-                            self.performSegue(withIdentifier: "GoHomeUser",sender: nil)
-                            //self.performSegue(withIdentifier: "GoHomeServiceProvider", sender: nil)
+                                DataCurrentServiceProvider.serviceProviderId = id
+                                DataCurrentServiceProvider.loadCurrentServiceProviderData()
+
                         }
-                    }) { (error) in
+                        self.activityIndicatorView.stopAnimating()
+                        self.performSegue(withIdentifier: "GoHomeUser", sender: self.type)
+                        
+                    })
+                    { (error) in
                         print(error.localizedDescription)
                     }
                     
@@ -80,23 +71,7 @@ class SignInViewController: UIViewController {
                 
             })
         }
-        
-        
     }
-    
-    func checkType(userId: String){
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        ref.child("users").child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            self.userType = value?.value(forKey: "type") as! String
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-        
-    }
-    
     
     func showAlertEmptyField(){
         
@@ -104,20 +79,6 @@ class SignInViewController: UIViewController {
         let message = "Sorry, You have entered an empty field please fill in all the required fields"
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "OK", style: .default , handler: nil)
-        alertController.addAction(actionOk)
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    func showAlertSuccess(){
-        let title = "Success"
-        let message = "Success"
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let actionOk = UIAlertAction(title: "OK", style: .default , handler: {
-            (alert: UIAlertAction!) -> Void in
-            self.activityIndicatorView.stopAnimating()
-            self.performSegue(withIdentifier: "GoHomeUser", sender: nil)
-            
-        })
         alertController.addAction(actionOk)
         present(alertController, animated: true, completion: nil)
     }

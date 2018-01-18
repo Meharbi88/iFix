@@ -47,7 +47,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBAction func signUp(_ sender: Any) {
         
         if (firstNameTextField.text == "" || lastNameTextField.text == "" || emailTextField.text == "" || passwordTextField.text == ""){
-            showAlert()
+            showAlertEmptyField()
         }else{
             if(userTypeSegement.selectedSegmentIndex == 0){
                 
@@ -57,7 +57,7 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                     }
                     if let u = user {
                         let reqularUser: User = User(email: self.emailTextField.text! ,firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: "User", userId: u.uid)
-                        self.saveUserInDatabase(user: reqularUser)
+                        WriteData.writeUser(user: reqularUser)
                         self.performSegue(withIdentifier: "GoSignIn", sender: nil)
                     }
                 }
@@ -69,8 +69,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
 
                     }
                     if let u = user {
-                        let serviceProviderUser: ServiceProvider = ServiceProvider(email: self.emailTextField.text! ,firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: self.type, userId: u.uid)
-                        self.saveServiceProviderInDatabase(serviceProvider: serviceProviderUser)
+                        let serviceProviderUser: ServiceProvider = ServiceProvider(email: self.emailTextField.text! ,firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: self.type, serviceProviderId: u.uid)
+                        WriteData.writeServiceProvider(serviceProvider: serviceProviderUser)
                         self.performSegue(withIdentifier: "GoSignIn", sender: nil)
                     }
                 }
@@ -79,10 +79,8 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             
         }
     }
-        
     
-    
-    func showAlert(){
+    func showAlertEmptyField(){
         
         let title = "Empty Field"
         let message = "Sorry, You have entered an empty field please fill in all the required fields"
@@ -102,29 +100,6 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         present(alertController, animated: true, completion: nil)
     }
     
-    func saveUserInDatabase(user: User){
-
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        
-        let user1 = ["email": user.email, "firstName": user.firstName, "lastName": user.lastName,"password": user.password,"type":user.type,"userId": user.userId]
-        
-        ref.root.child("users").child(user.userId).setValue(user1)
-
-
-    }
-    
-    func saveServiceProviderInDatabase(serviceProvider: ServiceProvider){
-        
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
-        
-        let serviceProvider1 = ["email": serviceProvider.email, "firstName": serviceProvider.firstName, "lastName": serviceProvider.lastName,"password": serviceProvider.password,"type":serviceProvider.type,"userId": serviceProvider.userId]
-        
-        ref.root.child("serviceProviders").child(serviceProvider.userId).setValue(serviceProvider1)
-        
-        
-    }
     
     @IBAction func userTypeSegmentChanged(_ sender: UISegmentedControl) {
         

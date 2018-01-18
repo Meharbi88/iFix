@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0E5E5709FED741999BBDBEA8 /* Pods_iFixUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01D33759B4E99913B40342B /* Pods_iFixUITests.framework */; };
+		2914BE6620100BE6001B69CE /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE6520100BE6001B69CE /* Offer.swift */; };
+		2914BE6920101082001B69CE /* WriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE6820101082001B69CE /* WriteData.swift */; };
+		2914BE6B201015FF001B69CE /* ReadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE6A201015FF001B69CE /* ReadData.swift */; };
+		2914BE6D20101C51001B69CE /* ReadAllDataForUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE6C20101C51001B69CE /* ReadAllDataForUser.swift */; };
+		2914BE6F20101C6E001B69CE /* ReadAllDataForServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE6E20101C6E001B69CE /* ReadAllDataForServiceProvider.swift */; };
+		2914BE71201026C7001B69CE /* DeleteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE70201026C7001B69CE /* DeleteData.swift */; };
 		29541E04200993BD00935CDC /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29541E03200993BD00935CDC /* OffersViewController.swift */; };
 		29541E06200993F200935CDC /* InProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29541E05200993F200935CDC /* InProgressViewController.swift */; };
 		29541E082009940A00935CDC /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29541E072009940A00935CDC /* HistoryViewController.swift */; };
@@ -18,6 +24,9 @@
 		29649287200C7D4B00A6CD05 /* InProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29649286200C7D4B00A6CD05 /* InProgressTableViewCell.swift */; };
 		29649289200C7D6500A6CD05 /* OfferTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29649288200C7D6500A6CD05 /* OfferTableViewCell.swift */; };
 		2964928B200C7D7900A6CD05 /* CompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2964928A200C7D7900A6CD05 /* CompleteTableViewCell.swift */; };
+		2985D8532010766200E69B9E /* OffersForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985D8522010766200E69B9E /* OffersForServiceProviderTableViewCell.swift */; };
+		2985D85520107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985D85420107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift */; };
+		2985D85720107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985D85620107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift */; };
 		29AD1E30200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AD1E2F200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift */; };
 		7D044D1520097AAF0063BCBE /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D044D1420097AAF0063BCBE /* ServiceProvider.swift */; };
 		7D044D53200C65080063BCBE /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D044D52200C65080063BCBE /* RandomGenerator.swift */; };
@@ -57,6 +66,12 @@
 
 /* Begin PBXFileReference section */
 		16BBC75196043D78F6296C31 /* Pods-iFixUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iFixUITests/Pods-iFixUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2914BE6520100BE6001B69CE /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
+		2914BE6820101082001B69CE /* WriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteData.swift; sourceTree = "<group>"; };
+		2914BE6A201015FF001B69CE /* ReadData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReadData.swift; path = "iFix/Database Operations/ReadData.swift"; sourceTree = SOURCE_ROOT; };
+		2914BE6C20101C51001B69CE /* ReadAllDataForUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAllDataForUser.swift; sourceTree = "<group>"; };
+		2914BE6E20101C6E001B69CE /* ReadAllDataForServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAllDataForServiceProvider.swift; sourceTree = "<group>"; };
+		2914BE70201026C7001B69CE /* DeleteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeleteData.swift; path = "iFix/Database Operations/DeleteData.swift"; sourceTree = SOURCE_ROOT; };
 		29541E03200993BD00935CDC /* OffersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewController.swift; sourceTree = "<group>"; };
 		29541E05200993F200935CDC /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
 		29541E072009940A00935CDC /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +82,9 @@
 		29649286200C7D4B00A6CD05 /* InProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressTableViewCell.swift; sourceTree = "<group>"; };
 		29649288200C7D6500A6CD05 /* OfferTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferTableViewCell.swift; sourceTree = "<group>"; };
 		2964928A200C7D7900A6CD05 /* CompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteTableViewCell.swift; sourceTree = "<group>"; };
+		2985D8522010766200E69B9E /* OffersForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
+		2985D85420107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
+		2985D85620107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
 		29AD1E2F200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnclaimedServicesForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
 		34FCCCAD11003693D6755753 /* Pods-iFixTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFixTests/Pods-iFixTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C9C20EC513831B95AF5B0D2 /* Pods-iFixUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFixUITests/Pods-iFixUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +158,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		2914BE6720101058001B69CE /* Database Operations */ = {
+			isa = PBXGroup;
+			children = (
+				2914BE6820101082001B69CE /* WriteData.swift */,
+				2914BE6C20101C51001B69CE /* ReadAllDataForUser.swift */,
+				2914BE6E20101C6E001B69CE /* ReadAllDataForServiceProvider.swift */,
+				2914BE6A201015FF001B69CE /* ReadData.swift */,
+				2914BE70201026C7001B69CE /* DeleteData.swift */,
+			);
+			path = "Database Operations";
+			sourceTree = "<group>";
+		};
 		7D611BF21FFD7EDA0015CF35 = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +195,7 @@
 		7D611BFD1FFD7EDA0015CF35 /* iFix */ = {
 			isa = PBXGroup;
 			children = (
+				2914BE6720101058001B69CE /* Database Operations */,
 				7DBEEB29200EA4EE00628669 /* ID Generators */,
 				7DBEEB28200EA49600628669 /* View Controllers */,
 				7DBEEB27200EA44500628669 /* Service Provider Cells */,
@@ -202,6 +233,7 @@
 		7DBEEB25200EA3A800628669 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				2914BE6520100BE6001B69CE /* Offer.swift */,
 				7DCA25DB1FFDC9D600917C12 /* User.swift */,
 				29541E0D2009ADC600935CDC /* DataCurrentUser.swift */,
 				29541E092009971700935CDC /* Service.swift */,
@@ -226,6 +258,9 @@
 			isa = PBXGroup;
 			children = (
 				29AD1E2F200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift */,
+				2985D8522010766200E69B9E /* OffersForServiceProviderTableViewCell.swift */,
+				2985D85420107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift */,
+				2985D85620107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift */,
 			);
 			path = "Service Provider Cells";
 			sourceTree = "<group>";
@@ -562,12 +597,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2914BE6F20101C6E001B69CE /* ReadAllDataForServiceProvider.swift in Sources */,
+				2914BE6D20101C51001B69CE /* ReadAllDataForUser.swift in Sources */,
+				2914BE6620100BE6001B69CE /* Offer.swift in Sources */,
 				7DCA25DE1FFDEFB900917C12 /* UserHomeViewController.swift in Sources */,
+				2914BE6B201015FF001B69CE /* ReadData.swift in Sources */,
 				29541E0A2009971700935CDC /* Service.swift in Sources */,
 				29649287200C7D4B00A6CD05 /* InProgressTableViewCell.swift in Sources */,
+				2985D8532010766200E69B9E /* OffersForServiceProviderTableViewCell.swift in Sources */,
+				2985D85720107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift in Sources */,
 				29AD1E30200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift in Sources */,
+				2914BE71201026C7001B69CE /* DeleteData.swift in Sources */,
 				7DCA25DA1FFDBCB700917C12 /* SignInViewController.swift in Sources */,
 				7DD1735D200D6074009E42FD /* DataCurrentServiceProvider.swift in Sources */,
+				2985D85520107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift in Sources */,
+				2914BE6920101082001B69CE /* WriteData.swift in Sources */,
 				2964928B200C7D7900A6CD05 /* CompleteTableViewCell.swift in Sources */,
 				29541E06200993F200935CDC /* InProgressViewController.swift in Sources */,
 				29541E082009940A00935CDC /* HistoryViewController.swift in Sources */,
@@ -750,7 +794,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BT3VA7J65R;
+				DEVELOPMENT_TEAM = MQ79U7S5FQ;
 				INFOPLIST_FILE = iFix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -769,7 +813,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BT3VA7J65R;
+				DEVELOPMENT_TEAM = MQ79U7S5FQ;
 				INFOPLIST_FILE = iFix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

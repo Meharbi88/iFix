@@ -10,24 +10,49 @@ import UIKit
 import Firebase
 class InProgressViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var topBar: UINavigationBar!
     @IBOutlet weak var inProgressTable: UITableView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataCurrentUser.inProgressServices.count
+        if(DataCurrentUser.userType=="User"){
+            return DataCurrentUser.inProgressServices.count
+        }else{
+            return DataCurrentServiceProvider.inProgressServices.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let inProgressCell = tableView.dequeueReusableCell(withIdentifier: "inProgressServiceCell", for: indexPath) as! InProgressTableViewCell
+        if(DataCurrentUser.userType=="User"){
+            let userInProgressCell = tableView.dequeueReusableCell(withIdentifier: "inProgressServicesCell", for: indexPath) as! InProgressTableViewCell
+
+            userInProgressCell.serviceName.text = DataCurrentUser.inProgressServices[indexPath.row].name
+            
+            return userInProgressCell
+        }else{
+            
+            let serviceProviderInProgressCell = tableView.dequeueReusableCell(withIdentifier: "inProgressServicesForServiceProviderCell", for: indexPath) as! InProgressForServiceProviderTableViewCell
         
-        inProgressCell.serviceName.text = DataCurrentUser.inProgressServices[indexPath.row].name
-        inProgressCell.serviceType.text = DataCurrentUser.inProgressServices[indexPath.row].type
-        
-        return inProgressCell
+            serviceProviderInProgressCell.serviceName.text = DataCurrentServiceProvider.inProgressServices[indexPath.row].name
+            
+            return serviceProviderInProgressCell
+        }
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        inProgressTable.rowHeight = 220
+        if(DataCurrentUser.userType=="User"){
+            inProgressTable.rowHeight = 140
+            topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
+        }
+        inProgressTable.reloadData()
     }
     
 
     
     @IBAction func logOut(_ sender: Any) {
+        DataCurrentUser.clear()
+        DataCurrentServiceProvider.clear()
         try! Auth.auth().signOut()
         
     }

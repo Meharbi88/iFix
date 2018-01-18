@@ -11,13 +11,9 @@ import UIKit
 class UnclaimedServicesForServiceProviderTableViewCell: UITableViewCell {
     
     @IBOutlet weak var serviceName: UILabel!
-    
     @IBOutlet weak var serviceDescription: UITextView!
-    
     @IBOutlet weak var userLocation: UILabel!
-    
-    @IBAction func makeOffer(_ sender: Any) {
-    }
+    @IBOutlet weak var makeOffer: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

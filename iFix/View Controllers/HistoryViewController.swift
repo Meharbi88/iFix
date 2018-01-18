@@ -11,6 +11,10 @@ import Firebase
 
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var completeTable: UITableView!
+    
+    @IBOutlet weak var topBar: UINavigationBar!
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataCurrentUser.completeServices.count
     }
@@ -24,8 +28,18 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         return completeCell
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        completeTable.rowHeight = 220
+        if(DataCurrentUser.userType=="User"){
+            completeTable.rowHeight = 140
+            topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
+        }
+        completeTable.reloadData()
+    }
+    
     @IBAction func logOut(_ sender: Any) {
+        DataCurrentUser.clear()
+        DataCurrentServiceProvider.clear()
         try! Auth.auth().signOut()
         
     }

@@ -42,6 +42,8 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
             unclaimedCellForServiceProvider.serviceName.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].name
             unclaimedCellForServiceProvider.userLocation.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].userAddress
             unclaimedCellForServiceProvider.serviceDescription.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].description
+            unclaimedCellForServiceProvider.makeOffer.addTarget(self, action: #selector(self.makeOffer), for: .touchUpInside)
+            unclaimedCellForServiceProvider.makeOffer.tag = indexPath.row
             return unclaimedCellForServiceProvider
         }
     }
@@ -54,12 +56,30 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
         self.refreshController.attributedTitle = NSAttributedString(string: "Last update was on \(NSDate())")
         self.refreshController.backgroundColor = UIColor.lightGray
         self.refreshController.addTarget(self, action: #selector(UserHomeViewController.didRefresh), for: .valueChanged)
+        
     }
     
     @objc func didRefresh(){
+        refreshController.beginRefreshing()
+        print("1\(DataCurrentUser.unclaimedServices)")
+        if(DataCurrentUser.userType=="User"){
+            DataCurrentUser.loadUnclaimedServicesData()
 
-        self.refreshController.endRefreshing()
+        }else{
+            DataCurrentServiceProvider.loadUnclaimedServicesData()
+        }
+
+        //refreshController.endRefreshing()
+
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        refreshController.endRefreshing()
+        myTable.reloadData()
+
+    }
+    
+
 
     override func viewDidAppear(_ animated: Bool) {
         myTable.rowHeight = 220
@@ -71,7 +91,6 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     @objc func cancelRequest(sender: UIButton){
-        print(DataCurrentUser.unclaimedServices[sender.tag].serviceId)
         showAlertConfirmation(service : DataCurrentUser.unclaimedServices[sender.tag]);
     }
     
@@ -91,19 +110,44 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func deleteService(service : Service) {
-        print("The list before2 of unlcimed service are: \(DataCurrentUser.listOfUnclaimedServices)")
         DataCurrentUser.deleteUnclaimedServiceLocally(service: service)
-        DataCurrentUser.deleteUnclaimedServiceDatabase(service: service)
-        print("The list after2 of unlcimed service are: \(DataCurrentUser.listOfUnclaimedServices)")
-        DataCurrentUser.updateListOfUnclaimedServices()
-
-//        updateDatabase()
+        DataCurrentUser.deleteUnclaimedServiceData(service: service)
         myTable.reloadData()
     }
     
-//    func updateDatabase() {
-//        DataCurrentUser.updateListOfUnclaimedServices()
-//    }
+    @objc func makeOffer(sender: UIButton){
+        showOfferDialog(service : DataCurrentServiceProvider.unclaimedServices[sender.tag]);
+    }
+
+    func showOfferDialog(service : Service){
+        let title = "Make Offer"
+        let message = "You are about to make offer for \(service.name) for the following price:"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+       
+        let actionSubmit = UIAlertAction(title: "Make Offer", style: .default , handler: {
+            (alert: UIAlertAction!) -> Void in
+            let price = alertController.textFields?[0].text
+            self.createOffer(service : service, price : price!)
+        })
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel , handler:nil)
+        
+        alertController.addAction(actionSubmit)
+        alertController.addAction(actionCancel)
+        alertController.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "Enter Your Price"
+            textField.keyboardType = .numberPad
+
+        })
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func createOffer(service: Service, price: String){
+        let offer : Offer = Offer(offerId: RandomGenerator.randomOfferID(), price: price, serviceId : service.serviceId, userId: service.userId, state: "undetermined", serviceProviderId: DataCurrentServiceProvider.serviceProviderId)
+        DataCurrentServiceProvider.undeterminedOffers.append(offer)
+        WriteData.writeOffer(offer:offer)
+        
+    }
     
     @IBAction func logOut(_ sender: Any) {
         DataCurrentUser.clear()

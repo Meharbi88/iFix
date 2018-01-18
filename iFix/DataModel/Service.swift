@@ -19,8 +19,9 @@ class Service{
     var userPhone : String
     var userAddress : String
     var status: String
+    var offerId : String
 
-    init(type: String, name: String, description: String, serviceId: String, userId: String, serviceProviderId: String, status: String, userPhone: String, userAddress: String) {
+    init(type: String, name: String, description: String, serviceId: String, userId: String, serviceProviderId: String, status: String, userPhone: String, userAddress: String, offerId: String) {
         self.type = type
         self.name = name
         self.description = description
@@ -30,6 +31,7 @@ class Service{
         self.status = status
         self.userPhone = userPhone
         self.userAddress = userAddress
+        self.offerId = offerId
         
     }
     

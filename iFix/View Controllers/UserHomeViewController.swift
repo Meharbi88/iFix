@@ -100,6 +100,26 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let actionYes = UIAlertAction(title: "Yes", style: .default , handler: {
             (alert: UIAlertAction!) -> Void in
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("offers").observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let key = snapshot.value as? NSDictionary
+                if (key != nil){
+                    for value in (key?.allValues)!{
+                        let value2 = value as! NSDictionary
+                        if((value2.value(forKey: "serviceId") as! String) == service.serviceId){
+                            let offerId = value2.value(forKey: "offerId") as! String
+                            DeleteData.deleteOffer(offerId: offerId)
+                            DataCurrentUser.deleteOfferLocally(offerId: offerId)
+                        }
+                    }
+                }
+            })
+            { (error) in
+                self.deleteService(service: service)
+                print(error.localizedDescription)
+            }
             self.deleteService(service: service)
         })
         let actionNo = UIAlertAction(title: "No", style: .cancel , handler:nil)
@@ -108,6 +128,8 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
         alertController.addAction(actionNo)
         present(alertController, animated: true, completion: nil)
     }
+    
+    
     
     func deleteService(service : Service) {
         DataCurrentUser.deleteUnclaimedServiceLocally(service: service)
@@ -127,7 +149,23 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
         let actionSubmit = UIAlertAction(title: "Make Offer", style: .default , handler: {
             (alert: UIAlertAction!) -> Void in
             let price = alertController.textFields?[0].text
-            self.createOffer(service : service, price : price!)
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("unclaimed services").child(service.serviceId).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let key = snapshot.value as? NSDictionary
+                if (key != nil){
+                    self.createOffer(service : service, price : price!)
+                }else{
+                    DataCurrentServiceProvider.loadUnclaimedServicesData()
+                    self.showAlertNotExistAntmore()
+                }
+            })
+            { (error) in
+                print(error.localizedDescription)
+                DataCurrentServiceProvider.loadUnclaimedServicesData()
+                self.showAlertNotExistAntmore()
+            }
         })
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel , handler:nil)
         
@@ -141,6 +179,21 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
         
         present(alertController, animated: true, completion: nil)
     }
+    
+    func showAlertNotExistAntmore(){
+        let title = "Error"
+        let message = "The service has been canceled"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let actionOk = UIAlertAction(title: "OK", style: .default , handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.myTable.reloadData()
+        })
+
+        alertController.addAction(actionOk)
+        present(alertController, animated: true, completion: nil)
+    }
+
     
     func createOffer(service: Service, price: String){
         let offer : Offer = Offer(offerId: RandomGenerator.randomOfferID(), price: price, serviceId : service.serviceId, userId: service.userId, state: "undetermined", serviceProviderId: DataCurrentServiceProvider.serviceProviderId)

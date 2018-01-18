@@ -66,6 +66,16 @@ class DataCurrentServiceProvider: NSObject {
         }
         return nil
     }
+    
+    class func getOfferPriceFromOfferAccpted(offerId: String) -> String{
+        
+        for index in 0..<acceptedOffers.count {
+            if (acceptedOffers[index].offerId == offerId) {
+                return acceptedOffers[index].price
+            }
+        }
+        return "Not Existed"
+    }
         
     class func clear(){
         serviceProvider = ServiceProvider()

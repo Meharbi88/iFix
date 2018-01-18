@@ -57,6 +57,16 @@ class DataCurrentUser: NSObject {
         DeleteData.deleteService(serviceId: service.serviceId, serviceState: "unclaimed services")
     }
     
+    class func deleteOfferLocally(offerId : String){
+        for index in 0..<undeterminedOffers.count {
+            if (undeterminedOffers[index].offerId == offerId) {
+                undeterminedOffers.remove(at: index)
+                break;
+            }
+        }
+    }
+    
+    
     class func updateOfferAcceptedLocally(offer : Offer, service : Service){
         for index in 0..<undeterminedOffers.count {
             if (undeterminedOffers[index].offerId == offer.offerId) {
@@ -98,6 +108,17 @@ class DataCurrentUser: NSObject {
         }
         return nil
     }
+    
+    class func getOfferPriceFromOfferAccpted(offerId: String) -> String{
+        
+        for index in 0..<acceptedOffers.count {
+            if (acceptedOffers[index].offerId == offerId) {
+                return acceptedOffers[index].price
+            }
+        }
+        return "Not Existed"
+    }
+    
     
     class func clear(){
         user = User()

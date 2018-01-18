@@ -63,7 +63,8 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let actionYes = UIAlertAction(title: "Confirm", style: .default , handler: {
             (alert: UIAlertAction!) -> Void in
             self.offerAccepted(offer : offer)
-            
+            //check off in the database if existed processed
+            // if not delete offer
             
         })
         let actionNo = UIAlertAction(title: "Back", style: .cancel , handler:nil)
@@ -94,6 +95,8 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let actionYes = UIAlertAction(title: "Confirm", style: .default , handler: {
             (alert: UIAlertAction!) -> Void in
             self.offerDeclined(offer: offer)
+            //check off in the database if existed processed
+            // if not delete offer
         })
         let actionNo = UIAlertAction(title: "Back", style: .cancel , handler:nil)
         
@@ -120,6 +123,7 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let actionYes = UIAlertAction(title: "Yes", style: .default , handler: {
             (alert: UIAlertAction!) -> Void in
             self.deleteOffer(offer: offer)
+            // check if the offer is undetermined if yes delete otherwise. the service is in progress please check the service list.
         })
         let actionNo = UIAlertAction(title: "No", style: .cancel , handler:nil)
         

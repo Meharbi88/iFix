@@ -27,22 +27,45 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
 
             userInProgressCell.serviceName.text = DataCurrentUser.inProgressServices[indexPath.row].name
             
+            userInProgressCell.serviceType.text = DataCurrentUser.inProgressServices[indexPath.row].type
+            
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("serviceProviders").child(DataCurrentUser.inProgressServices[indexPath.row].serviceProviderId).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                if(value != nil){
+                    let firstName = value?.value(forKey: "firstName") as! String
+                    let lastName = value?.value(forKey: "lastName") as! String
+                    userInProgressCell.serviceProviderName.text = "\(firstName) \(lastName)"
+                }
+            })
+            { (error) in
+                print(error.localizedDescription)
+            }
+            
+            userInProgressCell.price.text = DataCurrentUser.getOfferPriceFromOfferAccpted (offerId: DataCurrentUser.inProgressServices[indexPath.row].offerId)
+            // button
             return userInProgressCell
         }else{
             
             let serviceProviderInProgressCell = tableView.dequeueReusableCell(withIdentifier: "inProgressServicesForServiceProviderCell", for: indexPath) as! InProgressForServiceProviderTableViewCell
         
             serviceProviderInProgressCell.serviceName.text = DataCurrentServiceProvider.inProgressServices[indexPath.row].name
+            serviceProviderInProgressCell.userAddress.text = DataCurrentServiceProvider.inProgressServices[indexPath.row].userAddress
+            serviceProviderInProgressCell.userPhone.text = DataCurrentServiceProvider.inProgressServices[indexPath.row].userPhone
+            serviceProviderInProgressCell.price.text = DataCurrentServiceProvider.getOfferPriceFromOfferAccpted (offerId: DataCurrentServiceProvider.inProgressServices[indexPath.row].offerId)
             
+            //button
             return serviceProviderInProgressCell
         }
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        inProgressTable.rowHeight = 220
+        inProgressTable.rowHeight = 224
         if(DataCurrentUser.userType=="User"){
-            inProgressTable.rowHeight = 140
+            inProgressTable.rowHeight = 224
             topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
         }
         inProgressTable.reloadData()

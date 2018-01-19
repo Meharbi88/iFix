@@ -26,6 +26,10 @@ class SignInViewController: UIViewController {
         logInButton.isEnabled = true;
         DataCurrentUser.userId = ""
         DataCurrentServiceProvider.serviceProviderId = ""
+        logInButton.layer.cornerRadius = 15
+        logInButton.layer.borderColor = UIColor.black.cgColor
+        logInButton.layer.borderWidth = 2
+      
         // Do any additional setup after loading the view.
     }
 

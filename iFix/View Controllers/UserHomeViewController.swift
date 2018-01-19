@@ -10,14 +10,14 @@ import UIKit
 import Firebase
 
 class UserHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var topBar: UINavigationBar!
     
+    @IBOutlet weak var topBar: UINavigationBar!
     @IBOutlet weak var myTable: UITableView!
-  
     @IBOutlet weak var requestAService: UIBarButtonItem!
    
     var serviceId : String = "HIUserHomeViewController"
     var refreshController = UIRefreshControl()
+    //let cellSpacingHeight: CGFloat = 5
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(DataCurrentUser.userType=="User"){
@@ -26,6 +26,7 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
             return DataCurrentServiceProvider.unclaimedServices.count
         }
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(DataCurrentUser.userType=="User"){
@@ -36,7 +37,16 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
             unclaimedCell.cancelButton.addTarget(self, action: #selector(cancelRequest), for: .touchUpInside)
             unclaimedCell.cancelButton.tag = indexPath.row
             
+            unclaimedCell.layer.cornerRadius = 15
+            unclaimedCell.cancelButton.layer.cornerRadius = 15
+            unclaimedCell.cancelButton.layer.borderWidth = 2
+            unclaimedCell.layer.borderWidth = 2
+            unclaimedCell.layer.shadowColor = UIColor.darkGray.cgColor
+            unclaimedCell.layer.shadowOpacity = 5
+            unclaimedCell.layer.borderColor = UIColor.darkGray.cgColor
+            unclaimedCell.layer.masksToBounds = false
             return unclaimedCell
+            
         }else{
             let unclaimedCellForServiceProvider = tableView.dequeueReusableCell(withIdentifier: "unclaimedServicesForServiceProviderCell", for: indexPath) as! UnclaimedServicesForServiceProviderTableViewCell
             unclaimedCellForServiceProvider.serviceName.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].name
@@ -44,10 +54,24 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
             unclaimedCellForServiceProvider.serviceDescription.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].description
             unclaimedCellForServiceProvider.makeOffer.addTarget(self, action: #selector(self.makeOffer), for: .touchUpInside)
             unclaimedCellForServiceProvider.makeOffer.tag = indexPath.row
+            
+            unclaimedCellForServiceProvider.layer.cornerRadius = 15
+            unclaimedCellForServiceProvider.makeOffer.layer.cornerRadius = 15
+            unclaimedCellForServiceProvider.makeOffer.layer.borderWidth = 2
+            unclaimedCellForServiceProvider.makeOffer.layer.borderColor = UIColor.black.cgColor
+            unclaimedCellForServiceProvider.layer.borderWidth = 2
+            unclaimedCellForServiceProvider.layer.shadowColor = UIColor.darkGray.cgColor
+            unclaimedCellForServiceProvider.layer.shadowOpacity = 5
+            unclaimedCellForServiceProvider.layer.borderColor = UIColor.darkGray.cgColor
+            unclaimedCellForServiceProvider.layer.masksToBounds = false
             return unclaimedCellForServiceProvider
         }
     }
     
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return cellSpacingHeight
+//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

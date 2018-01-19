@@ -12,7 +12,8 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var topBar: UINavigationBar!
     @IBOutlet weak var inProgressTable: UITableView!
-    
+    var refreshController = UIRefreshControl()
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(DataCurrentUser.userType=="User"){
             return DataCurrentUser.inProgressServices.count
@@ -46,6 +47,9 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             
             userInProgressCell.price.text = DataCurrentUser.getOfferPriceFromOfferAccpted (offerId: DataCurrentUser.inProgressServices[indexPath.row].offerId)
             // button
+            userInProgressCell.didntShowUp.addTarget(self, action: #selector(didntShowUp), for: .touchUpInside)
+            userInProgressCell.didntShowUp.tag = indexPath.row
+            
             return userInProgressCell
         }else{
             
@@ -57,9 +61,112 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             serviceProviderInProgressCell.price.text = DataCurrentServiceProvider.getOfferPriceFromOfferAccpted (offerId: DataCurrentServiceProvider.inProgressServices[indexPath.row].offerId)
             
             //button
+            serviceProviderInProgressCell.cantMakeIt.addTarget(self, action: #selector(cantMakeIt), for: .touchUpInside)
+            
+            serviceProviderInProgressCell.cantMakeIt.tag = indexPath.row
+            
+            serviceProviderInProgressCell.serviceDone.addTarget(self, action: #selector(serviceDone), for: .touchUpInside)
+            
+            serviceProviderInProgressCell.cantMakeIt.tag = indexPath.row
+            
             return serviceProviderInProgressCell
         }
 
+    }
+    
+    @objc func didntShowUp(sender: UIButton){
+        showAlertDidntShowUpConfirmation(service : DataCurrentUser.inProgressServices[sender.tag]);
+    }
+    
+    func showAlertDidntShowUpConfirmation(service : Service){
+        let title = "Did Not Show Up"
+        let message = "You are about to cancel an accepted offer for your service id: \(service.serviceId)"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionYes = UIAlertAction(title: "Confirm", style: .default , handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.cancelForNotShowingUP(service: service)
+
+        })
+        let actionNo = UIAlertAction(title: "Back", style: .cancel , handler:nil)
+        
+        alertController.addAction(actionYes)
+        alertController.addAction(actionNo)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func cancelForNotShowingUP(service: Service){
+        let offerId = service.offerId
+        service.offerId = ""
+        service.serviceProviderId = ""
+        service.status = "unclaimed"
+        
+        DeleteData.deleteOffer(offerId: offerId)
+        DataCurrentUser.deleteInProgressServiceLocally(service: service)
+        DataCurrentUser.deleteInProgressServiceData(service: service)
+        DataCurrentUser.addUnclaimedServicesLocally(service: service)
+        DataCurrentUser.addUnclaimedServicesData(service: service)
+        inProgressTable.reloadData()
+    }
+    
+    @objc func cantMakeIt(sender: UIButton){
+        showAlertCantMakeItConfirmation(service : DataCurrentServiceProvider.inProgressServices[sender.tag]);
+    }
+    
+    func showAlertCantMakeItConfirmation(service : Service){
+        let title = "Can't Make It"
+        let message = "Your accepted offer for service id : \(service.serviceId) will be discard, are you sure you want to proceed?"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionYes = UIAlertAction(title: "Confirm", style: .default , handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.discardAcceptedOffer(service: service)
+        })
+        let actionNo = UIAlertAction(title: "Back", style: .cancel , handler:nil)
+        
+        alertController.addAction(actionYes)
+        alertController.addAction(actionNo)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func discardAcceptedOffer(service: Service){
+        let offerId = service.offerId
+        service.offerId = ""
+        service.serviceProviderId = ""
+        service.status = "unclaimed"
+        
+        DeleteData.deleteOffer(offerId: offerId)
+        DataCurrentServiceProvider.deleteInProgressServiceLocally(service: service)
+        DataCurrentServiceProvider.deleteInProgressServiceData(service: service)
+        DataCurrentServiceProvider.addUnclaimedServicesLocally(service: service)
+        DataCurrentServiceProvider.addUnclaimedServicesData(service: service)
+        inProgressTable.reloadData()
+    }
+    
+    @objc func serviceDone(sender: UIButton){
+        showAlertServiceDoneConfirmation(service : DataCurrentServiceProvider.inProgressServices[sender.tag]);
+    }
+    
+    func showAlertServiceDoneConfirmation(service : Service){
+        let title = "Complete Service Confirmation"
+        let message = "Congratulation!\nYou have completed service id : \(service.serviceId), please confirm"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionYes = UIAlertAction(title: "Confirm", style: .default , handler: {
+            (alert: UIAlertAction!) -> Void in
+            self.completedService(service: service)
+        })
+        let actionNo = UIAlertAction(title: "Back", style: .cancel , handler:nil)
+        
+        alertController.addAction(actionYes)
+        alertController.addAction(actionNo)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func completedService(service: Service){
+        service.status = "complete"
+        DataCurrentServiceProvider.deleteInProgressServiceLocally(service: service)
+        DataCurrentServiceProvider.deleteInProgressServiceData(service: service)
+        DataCurrentServiceProvider.addCompleteServicesLocally(service: service)
+        DataCurrentServiceProvider.addCompleteServicesData(service: service)
+        inProgressTable.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,8 +178,6 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         inProgressTable.reloadData()
     }
     
-
-    
     @IBAction func logOut(_ sender: Any) {
         DataCurrentUser.clear()
         DataCurrentServiceProvider.clear()
@@ -80,11 +185,34 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         inProgressTable.reloadData()
         // Do any additional setup after loading the view.
+        
+        inProgressTable.refreshControl = self.refreshController
+        self.refreshController.attributedTitle = NSAttributedString(string: "Last update was on \(NSDate())")
+        self.refreshController.backgroundColor = UIColor.lightGray
+        self.refreshController.addTarget(self, action: #selector(OffersViewController.didRefresh), for: .valueChanged)
+    }
+    
+    @objc func didRefresh(){
+        refreshController.beginRefreshing()
+        if(DataCurrentUser.userType=="User"){
+            DataCurrentUser.loadInProgressServicesData()
+            
+        }else{
+            DataCurrentServiceProvider.loadInProgressServicesData()
+        }
+        
+        //refreshController.endRefreshing()
+        
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        refreshController.endRefreshing()
+        inProgressTable.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {

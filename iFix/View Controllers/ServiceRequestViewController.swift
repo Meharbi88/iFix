@@ -18,6 +18,8 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
     @IBOutlet weak var serviceDescription: UITextView!
     @IBOutlet weak var serviceTypesPicker: UIPickerView!
     
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
     var type : String = "Plumping"
     
     let sub = ["Plumping", "Cars", "Home Appliances", "Electricity", "Electronic Devices", "Smart Phones"]
@@ -82,7 +84,10 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicatorView.isHidden = true
-
+        submitButton.layer.cornerRadius = 15
+        cancelButton.layer.cornerRadius = 15
+        serviceDescription.layer.cornerRadius = 15
+        
         // Do any additional setup after loading the view.
     }
 

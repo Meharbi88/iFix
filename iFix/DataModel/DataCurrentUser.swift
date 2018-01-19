@@ -21,6 +21,7 @@ class DataCurrentUser: NSObject {
     static var acceptedOffers : [Offer] = []
     static var declinedOffers : [Offer] = []
 
+    //Loading Data
     class func loadCurrentUserData(){
         ReadData.readUser(userId: userId)
     }
@@ -41,9 +42,7 @@ class DataCurrentUser: NSObject {
         ReadAllDataForUser.readOffers(userId: userId)
     }
     
-    
-
-    
+    //Updating Data Locally
     class func deleteUnclaimedServiceLocally(service : Service){
         for index in 0..<unclaimedServices.count {
             if (unclaimedServices[index].serviceId == service.serviceId) {
@@ -53,8 +52,13 @@ class DataCurrentUser: NSObject {
         }        
     }
     
-    class func deleteUnclaimedServiceData(service : Service){
-        DeleteData.deleteService(serviceId: service.serviceId, serviceState: "unclaimed services")
+    class func deleteInProgressServiceLocally(service: Service){
+        for index in 0..<inProgressServices.count {
+            if (inProgressServices[index].serviceId == service.serviceId) {
+                inProgressServices.remove(at: index)
+                break;
+            }
+        }
     }
     
     class func deleteOfferLocally(offerId : String){
@@ -66,23 +70,8 @@ class DataCurrentUser: NSObject {
         }
     }
     
-    
-    class func updateOfferAcceptedLocally(offer : Offer, service : Service){
-        for index in 0..<undeterminedOffers.count {
-            if (undeterminedOffers[index].offerId == offer.offerId) {
-                undeterminedOffers.remove(at: index)
-                break;
-            }
-        }
-        acceptedOffers.append(offer)
-        inProgressServices.append(service)
-        deleteUnclaimedServiceLocally(service: service)
-        deleteUnclaimedServiceData(service: service)
-    }
-    
-    class func updateOfferAcceptedDatabase(offer : Offer, service : Service){
-        WriteData.writeOffer(offer: offer)
-        WriteData.writeInProgressService(service: service)
+    class func addUnclaimedServicesLocally(service: Service){
+        unclaimedServices.append(service)
     }
     
     class func updateOfferDeclinedLocally(offer: Offer){
@@ -95,8 +84,17 @@ class DataCurrentUser: NSObject {
         declinedOffers.append(offer)
     }
     
-    class func updateOfferDeclinedDatabase (offer: Offer){
-        WriteData.writeOffer(offer: offer)
+    class func updateOfferAcceptedLocally(offer : Offer, service : Service){
+        for index in 0..<undeterminedOffers.count {
+            if (undeterminedOffers[index].offerId == offer.offerId) {
+                undeterminedOffers.remove(at: index)
+                break;
+            }
+        }
+        acceptedOffers.append(offer)
+        inProgressServices.append(service)
+        deleteUnclaimedServiceLocally(service: service)
+        deleteUnclaimedServiceData(service: service)
     }
     
     class func getServiceFromUnclaimedServices(serviceId: String) -> Service?{
@@ -117,6 +115,28 @@ class DataCurrentUser: NSObject {
             }
         }
         return "Not Existed"
+    }
+
+    //Database
+    class func deleteUnclaimedServiceData(service : Service){
+        DeleteData.deleteService(serviceId: service.serviceId, serviceState: "unclaimed services")
+    }
+    
+    class func deleteInProgressServiceData(service: Service){
+        DeleteData.deleteService(serviceId: service.serviceId, serviceState: "in progress services")
+    }
+    
+    class func addUnclaimedServicesData(service: Service){
+        WriteData.writeUnclaimedService(service: service)
+    }
+    
+    class func updateOfferAcceptedDatabase(offer : Offer, service : Service){
+        WriteData.writeOffer(offer: offer)
+        WriteData.writeInProgressService(service: service)
+    }
+    
+    class func updateOfferDeclinedDatabase (offer: Offer){
+        WriteData.writeOffer(offer: offer)
     }
     
     

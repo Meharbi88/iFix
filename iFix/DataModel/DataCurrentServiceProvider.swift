@@ -53,6 +53,35 @@ class DataCurrentServiceProvider: NSObject {
         }
     }
     
+    class func deleteInProgressServiceLocally(service: Service){
+        for index in 0..<inProgressServices.count {
+            if (inProgressServices[index].serviceId == service.serviceId) {
+                inProgressServices.remove(at: index)
+                break;
+            }
+        }
+    }
+    
+    class func addCompleteServicesLocally(service: Service){
+        completeServices.append(service)
+    }
+    
+    class func addCompleteServicesData(service: Service){
+        WriteData.writeCompleteService(service: service)
+    }
+    
+    class func addUnclaimedServicesLocally(service: Service){
+        unclaimedServices.append(service)
+    }
+    
+    class func deleteInProgressServiceData(service: Service){
+        DeleteData.deleteService(serviceId: service.serviceId, serviceState: "in progress services")
+    }
+    
+    class func addUnclaimedServicesData(service: Service){
+        WriteData.writeUnclaimedService(service: service)
+    }
+    
     class func deleteOfferData(offer : Offer){
         DeleteData.deleteOffer(offerId : offer.offerId)
     }

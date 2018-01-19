@@ -12,26 +12,45 @@ import Firebase
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var completeTable: UITableView!
-    
     @IBOutlet weak var topBar: UINavigationBar!
+    var refreshController = UIRefreshControl()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataCurrentUser.completeServices.count
+        if(DataCurrentUser.userType=="User"){
+            return DataCurrentUser.completeServices.count
+        }else{
+            return DataCurrentServiceProvider.completeServices.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let completeCell = tableView.dequeueReusableCell(withIdentifier: "completeServiceCell", for: indexPath) as! CompleteTableViewCell
-        
-        completeCell.serviceName.text = DataCurrentUser.completeServices[indexPath.row].name
-        completeCell.serviceType.text = DataCurrentUser.completeServices[indexPath.row].type
-        
-        return completeCell
+        if(DataCurrentUser.userType=="User"){
+            let userCompleteCell = tableView.dequeueReusableCell(withIdentifier: "completeServicesCell", for: indexPath) as! CompleteTableViewCell
+            
+            userCompleteCell.serviceName.text = DataCurrentUser.completeServices[indexPath.row].name
+            
+            userCompleteCell.serviceType.text = DataCurrentUser.completeServices[indexPath.row].type
+            
+            userCompleteCell.price.text = DataCurrentUser.getOfferPriceFromOfferAccpted (offerId: DataCurrentUser.completeServices[indexPath.row].offerId)
+            
+            return userCompleteCell
+            
+        }else{
+            
+            let serviceProviderCompleteCell = tableView.dequeueReusableCell(withIdentifier: "completeServicesForServiceProviderCell", for: indexPath) as! CompleteForServiceProviderTableViewCell
+            
+            serviceProviderCompleteCell.serviceName.text = DataCurrentServiceProvider.completeServices[indexPath.row].name
+
+            serviceProviderCompleteCell.price.text = DataCurrentServiceProvider.getOfferPriceFromOfferAccpted (offerId: DataCurrentServiceProvider.completeServices[indexPath.row].offerId)
+            
+            return serviceProviderCompleteCell
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        completeTable.rowHeight = 220
+        completeTable.rowHeight = 102
         if(DataCurrentUser.userType=="User"){
-            completeTable.rowHeight = 140
+            completeTable.rowHeight = 146
             topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
         }
         completeTable.reloadData()
@@ -41,13 +60,33 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         DataCurrentUser.clear()
         DataCurrentServiceProvider.clear()
         try! Auth.auth().signOut()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        completeTable.reloadData()
         // Do any additional setup after loading the view.
+        
+        completeTable.refreshControl = self.refreshController
+        self.refreshController.attributedTitle = NSAttributedString(string: "Last update was on \(NSDate())")
+        self.refreshController.backgroundColor = UIColor.lightGray
+        self.refreshController.addTarget(self, action: #selector(OffersViewController.didRefresh), for: .valueChanged)
+    }
+    
+ 
+
+    @objc func didRefresh(){
+        refreshController.beginRefreshing()
+        if(DataCurrentUser.userType=="User"){
+            DataCurrentUser.loadCompleteServicesData()
+        }else{
+            DataCurrentServiceProvider.loadCompleteServicesData()
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        refreshController.endRefreshing()
+        completeTable.reloadData()
     }
 
     override func didReceiveMemoryWarning() {

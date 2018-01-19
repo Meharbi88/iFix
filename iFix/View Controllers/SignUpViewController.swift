@@ -11,6 +11,7 @@ import Firebase
 
 class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var userTypeSegement: UISegmentedControl!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -24,7 +25,15 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        signUpButton.layer.cornerRadius = 15
+        signUpButton.layer.borderColor = UIColor.black.cgColor
+        signUpButton.layer.borderWidth = 2
+        userTypeSegement.layer.cornerRadius = 15
+        firstNameTextField.layer.cornerRadius = 15
+        lastNameTextField.layer.cornerRadius = 15
+        emailTextField.layer.cornerRadius = 15
+        passwordTextField.layer.cornerRadius = 15
+        serviceTypesPicker.layer.cornerRadius = 15
         // Do any additional setup after loading the view.
     }
 

@@ -14,6 +14,7 @@
 		2914BE6D20101C51001B69CE /* ReadAllDataForUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE6C20101C51001B69CE /* ReadAllDataForUser.swift */; };
 		2914BE6F20101C6E001B69CE /* ReadAllDataForServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE6E20101C6E001B69CE /* ReadAllDataForServiceProvider.swift */; };
 		2914BE71201026C7001B69CE /* DeleteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2914BE70201026C7001B69CE /* DeleteData.swift */; };
+		291E1ABF2013563900006D77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 291E1ABE2013563400006D77 /* Assets.xcassets */; };
 		29541E04200993BD00935CDC /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29541E03200993BD00935CDC /* OffersViewController.swift */; };
 		29541E06200993F200935CDC /* InProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29541E05200993F200935CDC /* InProgressViewController.swift */; };
 		29541E082009940A00935CDC /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29541E072009940A00935CDC /* HistoryViewController.swift */; };
@@ -42,7 +43,6 @@
 		7DCA25DC1FFDC9D600917C12 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA25DB1FFDC9D600917C12 /* User.swift */; };
 		7DCA25DE1FFDEFB900917C12 /* UserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */; };
 		7DD1735D200D6074009E42FD /* DataCurrentServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */; };
-		7DDEBAA92012B48F00947E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DDEBAA82012B48E00947E9C /* Assets.xcassets */; };
 		9983BC5F7B90693C786D82F5 /* Pods_iFixTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7361E48A7AD21746C6E73A /* Pods_iFixTests.framework */; };
 		CD44310A8B1EA18E7540407A /* Pods_iFix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826303C7D31F4CA7A74F339C /* Pods_iFix.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +72,7 @@
 		2914BE6C20101C51001B69CE /* ReadAllDataForUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAllDataForUser.swift; sourceTree = "<group>"; };
 		2914BE6E20101C6E001B69CE /* ReadAllDataForServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadAllDataForServiceProvider.swift; sourceTree = "<group>"; };
 		2914BE70201026C7001B69CE /* DeleteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeleteData.swift; path = "iFix/Database Operations/DeleteData.swift"; sourceTree = SOURCE_ROOT; };
+		291E1ABE2013563400006D77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29541E03200993BD00935CDC /* OffersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewController.swift; sourceTree = "<group>"; };
 		29541E05200993F200935CDC /* InProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressViewController.swift; sourceTree = "<group>"; };
 		29541E072009940A00935CDC /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		7DCA25DB1FFDC9D600917C12 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeViewController.swift; sourceTree = "<group>"; };
 		7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCurrentServiceProvider.swift; sourceTree = "<group>"; };
-		7DDEBAA82012B48E00947E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		826303C7D31F4CA7A74F339C /* Pods_iFix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A166FD57F354CBB0FE479401 /* Pods-iFixTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iFixTests/Pods-iFixTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD7361E48A7AD21746C6E73A /* Pods_iFixTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFixTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,7 +205,7 @@
 				7D611BFE1FFD7EDA0015CF35 /* AppDelegate.swift */,
 				7D611C001FFD7EDA0015CF35 /* ViewController.swift */,
 				7D611C021FFD7EDB0015CF35 /* Main.storyboard */,
-				7DDEBAA82012B48E00947E9C /* Assets.xcassets */,
+				291E1ABE2013563400006D77 /* Assets.xcassets */,
 				7D611C071FFD7EDB0015CF35 /* LaunchScreen.storyboard */,
 				7D611C0A1FFD7EDB0015CF35 /* Info.plist */,
 			);
@@ -415,7 +415,7 @@
 			files = (
 				7D611C091FFD7EDB0015CF35 /* LaunchScreen.storyboard in Resources */,
 				7DAD311F1FFF10130092450C /* GoogleService-Info.plist in Resources */,
-				7DDEBAA92012B48F00947E9C /* Assets.xcassets in Resources */,
+				291E1ABF2013563900006D77 /* Assets.xcassets in Resources */,
 				7D611C041FFD7EDB0015CF35 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

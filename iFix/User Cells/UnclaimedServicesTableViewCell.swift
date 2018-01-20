@@ -10,6 +10,7 @@ import UIKit
 
 class UnclaimedServicesTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var numberOfOffers: UILabel!
     @IBOutlet weak var serviceName: UILabel!
     @IBOutlet weak var serviceType: UILabel!
     @IBOutlet weak var cancelButton: UIButton!

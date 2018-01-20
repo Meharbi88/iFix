@@ -31,7 +31,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             
             userCompleteCell.serviceType.text = DataCurrentUser.completeServices[indexPath.row].type
             
-            userCompleteCell.price.text = DataCurrentUser.getOfferPriceFromOfferAccpted (offerId: DataCurrentUser.completeServices[indexPath.row].offerId)
+            userCompleteCell.price.text = "$\(DataCurrentUser.getOfferPriceFromOfferAccpted (offerId: DataCurrentUser.completeServices[indexPath.row].offerId))"
+            
+            userCompleteCell.layer.cornerRadius = 15
+            userCompleteCell.layer.borderWidth = 2
+            userCompleteCell.layer.shadowColor = UIColor.darkGray.cgColor
+            userCompleteCell.layer.shadowOpacity = 5
+            userCompleteCell.layer.borderColor = UIColor.darkGray.cgColor
+            userCompleteCell.layer.masksToBounds = false
             
             return userCompleteCell
             
@@ -41,16 +48,23 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
             
             serviceProviderCompleteCell.serviceName.text = DataCurrentServiceProvider.completeServices[indexPath.row].name
 
-            serviceProviderCompleteCell.price.text = DataCurrentServiceProvider.getOfferPriceFromOfferAccpted (offerId: DataCurrentServiceProvider.completeServices[indexPath.row].offerId)
+            serviceProviderCompleteCell.price.text = "$\(DataCurrentServiceProvider.getOfferPriceFromOfferAccpted (offerId: DataCurrentServiceProvider.completeServices[indexPath.row].offerId))"
+            
+            serviceProviderCompleteCell.layer.cornerRadius = 15
+            serviceProviderCompleteCell.layer.borderWidth = 2
+            serviceProviderCompleteCell.layer.shadowColor = UIColor.darkGray.cgColor
+            serviceProviderCompleteCell.layer.shadowOpacity = 5
+            serviceProviderCompleteCell.layer.borderColor = UIColor.darkGray.cgColor
+            serviceProviderCompleteCell.layer.masksToBounds = false
             
             return serviceProviderCompleteCell
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        completeTable.rowHeight = 102
+        completeTable.rowHeight = 72
         if(DataCurrentUser.userType=="User"){
-            completeTable.rowHeight = 146
+            completeTable.rowHeight = 106
             topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
         }
         completeTable.reloadData()

@@ -12,6 +12,7 @@ class UnclaimedServicesForServiceProviderTableViewCell: UITableViewCell {
     
     @IBOutlet weak var serviceName: UILabel!
     @IBOutlet weak var serviceDescription: UITextView!
+    @IBOutlet weak var numberOfOffers: UILabel!
     @IBOutlet weak var userLocation: UILabel!
     @IBOutlet weak var makeOffer: UIButton!
     

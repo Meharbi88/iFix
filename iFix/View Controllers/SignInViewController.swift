@@ -11,6 +11,7 @@ import Firebase
 
 class SignInViewController: UIViewController {
     
+    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -29,7 +30,9 @@ class SignInViewController: UIViewController {
         logInButton.layer.cornerRadius = 15
         logInButton.layer.borderColor = UIColor.black.cgColor
         logInButton.layer.borderWidth = 2
-      
+        cancelButton.layer.cornerRadius = 15
+        cancelButton.layer.borderColor = UIColor.black.cgColor
+        cancelButton.layer.borderWidth = 2
         // Do any additional setup after loading the view.
     }
 

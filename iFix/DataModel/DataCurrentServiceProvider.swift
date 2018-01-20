@@ -96,6 +96,16 @@ class DataCurrentServiceProvider: NSObject {
         return nil
     }
     
+    class func getNumberOfOffers(serviceId: String) -> Int{
+        var numberOfOffers: Int = 0
+        for index in 0..<undeterminedOffers.count {
+            if (undeterminedOffers[index].serviceId == serviceId) {
+                numberOfOffers = numberOfOffers+1
+            }
+        }
+        return numberOfOffers
+    }
+    
     class func getOfferPriceFromOfferAccpted(offerId: String) -> String{
         
         for index in 0..<acceptedOffers.count {

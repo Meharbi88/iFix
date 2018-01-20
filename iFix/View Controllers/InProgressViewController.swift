@@ -45,11 +45,17 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
                 print(error.localizedDescription)
             }
             
-            userInProgressCell.price.text = DataCurrentUser.getOfferPriceFromOfferAccpted (offerId: DataCurrentUser.inProgressServices[indexPath.row].offerId)
+            userInProgressCell.price.text = "$\(DataCurrentUser.getOfferPriceFromOfferAccpted (offerId: DataCurrentUser.inProgressServices[indexPath.row].offerId))"
             // button
             userInProgressCell.didntShowUp.addTarget(self, action: #selector(didntShowUp), for: .touchUpInside)
             userInProgressCell.didntShowUp.tag = indexPath.row
-            
+            userInProgressCell.layer.cornerRadius = 15
+            userInProgressCell.didntShowUp.layer.cornerRadius = 15
+            userInProgressCell.layer.borderWidth = 2
+            userInProgressCell.layer.shadowColor = UIColor.darkGray.cgColor
+            userInProgressCell.layer.shadowOpacity = 5
+            userInProgressCell.layer.borderColor = UIColor.darkGray.cgColor
+            userInProgressCell.layer.masksToBounds = false
             return userInProgressCell
         }else{
             
@@ -58,7 +64,7 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             serviceProviderInProgressCell.serviceName.text = DataCurrentServiceProvider.inProgressServices[indexPath.row].name
             serviceProviderInProgressCell.userAddress.text = DataCurrentServiceProvider.inProgressServices[indexPath.row].userAddress
             serviceProviderInProgressCell.userPhone.text = DataCurrentServiceProvider.inProgressServices[indexPath.row].userPhone
-            serviceProviderInProgressCell.price.text = DataCurrentServiceProvider.getOfferPriceFromOfferAccpted (offerId: DataCurrentServiceProvider.inProgressServices[indexPath.row].offerId)
+            serviceProviderInProgressCell.price.text = "$\(DataCurrentServiceProvider.getOfferPriceFromOfferAccpted (offerId: DataCurrentServiceProvider.inProgressServices[indexPath.row].offerId))"
             
             //button
             serviceProviderInProgressCell.cantMakeIt.addTarget(self, action: #selector(cantMakeIt), for: .touchUpInside)
@@ -67,8 +73,16 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
             
             serviceProviderInProgressCell.serviceDone.addTarget(self, action: #selector(serviceDone), for: .touchUpInside)
             
-            serviceProviderInProgressCell.cantMakeIt.tag = indexPath.row
+            serviceProviderInProgressCell.serviceDone.tag = indexPath.row
             
+            serviceProviderInProgressCell.layer.cornerRadius = 15
+            serviceProviderInProgressCell.cantMakeIt.layer.cornerRadius = 15
+            serviceProviderInProgressCell.serviceDone.layer.cornerRadius = 15
+            serviceProviderInProgressCell.layer.borderWidth = 2
+            serviceProviderInProgressCell.layer.shadowColor = UIColor.darkGray.cgColor
+            serviceProviderInProgressCell.layer.shadowOpacity = 5
+            serviceProviderInProgressCell.layer.borderColor = UIColor.darkGray.cgColor
+            serviceProviderInProgressCell.layer.masksToBounds = false
             return serviceProviderInProgressCell
         }
 
@@ -170,9 +184,9 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        inProgressTable.rowHeight = 224
+        inProgressTable.rowHeight = 180
         if(DataCurrentUser.userType=="User"){
-            inProgressTable.rowHeight = 224
+            inProgressTable.rowHeight = 188
             topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
         }
         inProgressTable.reloadData()

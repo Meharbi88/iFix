@@ -34,12 +34,13 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
             unclaimedCell.serviceName.text = DataCurrentUser.unclaimedServices[indexPath.row].name
             unclaimedCell.serviceType.text = DataCurrentUser.unclaimedServices[indexPath.row].type
             unclaimedCell.serviceId = DataCurrentUser.unclaimedServices[indexPath.row].serviceId
+            unclaimedCell.numberOfOffers.text = "Number of Offers: \(DataCurrentUser.getNumberOfOffers(serviceId: DataCurrentUser.unclaimedServices[indexPath.row].serviceId))"
+
             unclaimedCell.cancelButton.addTarget(self, action: #selector(cancelRequest), for: .touchUpInside)
             unclaimedCell.cancelButton.tag = indexPath.row
             
             unclaimedCell.layer.cornerRadius = 15
             unclaimedCell.cancelButton.layer.cornerRadius = 15
-            unclaimedCell.cancelButton.layer.borderWidth = 2
             unclaimedCell.layer.borderWidth = 2
             unclaimedCell.layer.shadowColor = UIColor.darkGray.cgColor
             unclaimedCell.layer.shadowOpacity = 5
@@ -52,6 +53,9 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
             unclaimedCellForServiceProvider.serviceName.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].name
             unclaimedCellForServiceProvider.userLocation.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].userAddress
             unclaimedCellForServiceProvider.serviceDescription.text = DataCurrentServiceProvider.unclaimedServices[indexPath.row].description
+            
+            unclaimedCellForServiceProvider.numberOfOffers.text = "Number of Offers: \(DataCurrentServiceProvider.getNumberOfOffers(serviceId: DataCurrentServiceProvider.unclaimedServices[indexPath.row].serviceId))"
+            
             unclaimedCellForServiceProvider.makeOffer.addTarget(self, action: #selector(self.makeOffer), for: .touchUpInside)
             unclaimedCellForServiceProvider.makeOffer.tag = indexPath.row
             
@@ -108,7 +112,7 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidAppear(_ animated: Bool) {
         myTable.rowHeight = 220
         if(DataCurrentUser.userType=="User"){
-            myTable.rowHeight = 140
+            myTable.rowHeight = 92
             topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
         }
         myTable.reloadData()
@@ -223,6 +227,8 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
         let offer : Offer = Offer(offerId: RandomGenerator.randomOfferID(), price: price, serviceId : service.serviceId, userId: service.userId, state: "undetermined", serviceProviderId: DataCurrentServiceProvider.serviceProviderId)
         DataCurrentServiceProvider.undeterminedOffers.append(offer)
         WriteData.writeOffer(offer:offer)
+        myTable.reloadData()
+
         
     }
     

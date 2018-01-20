@@ -33,7 +33,6 @@
 		7D611BFF1FFD7EDA0015CF35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D611BFE1FFD7EDA0015CF35 /* AppDelegate.swift */; };
 		7D611C011FFD7EDA0015CF35 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D611C001FFD7EDA0015CF35 /* ViewController.swift */; };
 		7D611C041FFD7EDB0015CF35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D611C021FFD7EDB0015CF35 /* Main.storyboard */; };
-		7D611C061FFD7EDB0015CF35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D611C051FFD7EDB0015CF35 /* Assets.xcassets */; };
 		7D611C091FFD7EDB0015CF35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D611C071FFD7EDB0015CF35 /* LaunchScreen.storyboard */; };
 		7D611C141FFD7EDB0015CF35 /* iFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D611C131FFD7EDB0015CF35 /* iFixTests.swift */; };
 		7D611C1F1FFD7EDB0015CF35 /* iFixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D611C1E1FFD7EDB0015CF35 /* iFixUITests.swift */; };
@@ -43,6 +42,7 @@
 		7DCA25DC1FFDC9D600917C12 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA25DB1FFDC9D600917C12 /* User.swift */; };
 		7DCA25DE1FFDEFB900917C12 /* UserHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */; };
 		7DD1735D200D6074009E42FD /* DataCurrentServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */; };
+		7DDEBAA92012B48F00947E9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DDEBAA82012B48E00947E9C /* Assets.xcassets */; };
 		9983BC5F7B90693C786D82F5 /* Pods_iFixTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7361E48A7AD21746C6E73A /* Pods_iFixTests.framework */; };
 		CD44310A8B1EA18E7540407A /* Pods_iFix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 826303C7D31F4CA7A74F339C /* Pods_iFix.framework */; };
 /* End PBXBuildFile section */
@@ -94,7 +94,6 @@
 		7D611BFE1FFD7EDA0015CF35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D611C001FFD7EDA0015CF35 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7D611C031FFD7EDB0015CF35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7D611C051FFD7EDB0015CF35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D611C081FFD7EDB0015CF35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D611C0A1FFD7EDB0015CF35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D611C0F1FFD7EDB0015CF35 /* iFixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iFixTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +108,7 @@
 		7DCA25DB1FFDC9D600917C12 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7DCA25DD1FFDEFB900917C12 /* UserHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHomeViewController.swift; sourceTree = "<group>"; };
 		7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCurrentServiceProvider.swift; sourceTree = "<group>"; };
+		7DDEBAA82012B48E00947E9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../../../../../../.Trash/Assets.xcassets; sourceTree = "<group>"; };
 		826303C7D31F4CA7A74F339C /* Pods_iFix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A166FD57F354CBB0FE479401 /* Pods-iFixTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iFixTests/Pods-iFixTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD7361E48A7AD21746C6E73A /* Pods_iFixTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iFixTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,7 +205,7 @@
 				7D611BFE1FFD7EDA0015CF35 /* AppDelegate.swift */,
 				7D611C001FFD7EDA0015CF35 /* ViewController.swift */,
 				7D611C021FFD7EDB0015CF35 /* Main.storyboard */,
-				7D611C051FFD7EDB0015CF35 /* Assets.xcassets */,
+				7DDEBAA82012B48E00947E9C /* Assets.xcassets */,
 				7D611C071FFD7EDB0015CF35 /* LaunchScreen.storyboard */,
 				7D611C0A1FFD7EDB0015CF35 /* Info.plist */,
 			);
@@ -415,7 +415,7 @@
 			files = (
 				7D611C091FFD7EDB0015CF35 /* LaunchScreen.storyboard in Resources */,
 				7DAD311F1FFF10130092450C /* GoogleService-Info.plist in Resources */,
-				7D611C061FFD7EDB0015CF35 /* Assets.xcassets in Resources */,
+				7DDEBAA92012B48F00947E9C /* Assets.xcassets in Resources */,
 				7D611C041FFD7EDB0015CF35 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

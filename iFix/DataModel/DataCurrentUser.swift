@@ -116,6 +116,16 @@ class DataCurrentUser: NSObject {
         }
         return "Not Existed"
     }
+    
+    class func getNumberOfOffers(serviceId: String) -> Int{
+        var numberOfOffers: Int = 0
+        for index in 0..<undeterminedOffers.count {
+            if (undeterminedOffers[index].serviceId == serviceId) {
+                numberOfOffers = numberOfOffers+1
+            }
+        }
+        return numberOfOffers
+    }
 
     //Database
     class func deleteUnclaimedServiceData(service : Service){

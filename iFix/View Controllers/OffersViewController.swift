@@ -29,7 +29,7 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let userOfferCell = tableView.dequeueReusableCell(withIdentifier: "offerCell", for: indexPath) as! OfferTableViewCell
             userOfferCell.serviceName.text = DataCurrentUser.getServiceFromUnclaimedServices(serviceId: DataCurrentUser.undeterminedOffers[indexPath.row].serviceId)?.name
             userOfferCell.serviceType.text = DataCurrentUser.getServiceFromUnclaimedServices(serviceId: DataCurrentUser.undeterminedOffers[indexPath.row].serviceId)?.type
-            userOfferCell.price.text = DataCurrentUser.undeterminedOffers[indexPath.row].price
+            userOfferCell.price.text = "$\(DataCurrentUser.undeterminedOffers[indexPath.row].price)"
             
             userOfferCell.acceptOffer.addTarget(self, action: #selector(acceptOffer), for: .touchUpInside)
             userOfferCell.acceptOffer.tag = indexPath.row
@@ -37,16 +37,33 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
             userOfferCell.declineOffer.addTarget(self, action: #selector(declineOffer), for: .touchUpInside)
             userOfferCell.declineOffer.tag = indexPath.row
             
+            userOfferCell.layer.cornerRadius = 15
+            userOfferCell.acceptOffer.layer.cornerRadius = 15
+            userOfferCell.declineOffer.layer.cornerRadius = 15
+            userOfferCell.layer.borderWidth = 2
+            userOfferCell.layer.shadowColor = UIColor.darkGray.cgColor
+            userOfferCell.layer.shadowOpacity = 5
+            userOfferCell.layer.borderColor = UIColor.darkGray.cgColor
+            userOfferCell.layer.masksToBounds = false
+            
             return userOfferCell
         }else{
             let serviceProviderOfferCell = tableView.dequeueReusableCell(withIdentifier: "offerServiceProviderCell", for: indexPath) as! OffersForServiceProviderTableViewCell
             serviceProviderOfferCell.serviceName.text = DataCurrentServiceProvider.getServiceFromUnclaimedServices(serviceId: DataCurrentServiceProvider.undeterminedOffers[indexPath.row].serviceId)?.name
-
-            serviceProviderOfferCell.price.text = DataCurrentServiceProvider.undeterminedOffers[indexPath.row].price
+            
+            serviceProviderOfferCell.serviceType.text = DataCurrentServiceProvider.getServiceFromUnclaimedServices(serviceId: DataCurrentServiceProvider.undeterminedOffers[indexPath.row].serviceId)?.type
+            
+            serviceProviderOfferCell.price.text = "$\(DataCurrentServiceProvider.undeterminedOffers[indexPath.row].price)"
             
             serviceProviderOfferCell.cancelOffer.addTarget(self, action: #selector(cancelOffer), for: .touchUpInside)
             serviceProviderOfferCell.cancelOffer.tag = indexPath.row
-
+            serviceProviderOfferCell.layer.cornerRadius = 15
+            serviceProviderOfferCell.cancelOffer.layer.cornerRadius = 15
+            serviceProviderOfferCell.layer.borderWidth = 2
+            serviceProviderOfferCell.layer.shadowColor = UIColor.darkGray.cgColor
+            serviceProviderOfferCell.layer.shadowOpacity = 5
+            serviceProviderOfferCell.layer.borderColor = UIColor.darkGray.cgColor
+            serviceProviderOfferCell.layer.masksToBounds = false
             return serviceProviderOfferCell
         }
     }
@@ -81,6 +98,7 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
         service.serviceProviderId = offer.serviceProviderId
         DataCurrentUser.updateOfferAcceptedLocally(offer : offer, service : service)
         DataCurrentUser.updateOfferAcceptedDatabase(offer : offer, service: service)
+        // delete other offers that still reviewing under this service beacuse one offer approved
         offersTable.reloadData()
     }
     
@@ -147,9 +165,9 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        offersTable.rowHeight = 198
+        offersTable.rowHeight = 149
         if(DataCurrentUser.userType=="User"){
-            offersTable.rowHeight = 198
+            offersTable.rowHeight = 155
             topBar.topItem?.rightBarButtonItem?.customView?.isHidden = false
         }
         offersTable.reloadData()

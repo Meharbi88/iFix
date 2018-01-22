@@ -715,6 +715,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.61168060970000004" green="1" blue="0.5552702088" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveEditing:" destination="EAp-GV-dKz" eventType="touchUpInside" id="Cdt-tu-H7m"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="df9-Wj-Tra">
                                 <rect key="frame" x="0.0" y="261" width="375" height="158"/>
@@ -737,8 +740,8 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ifixlogo" translatesAutoresizingMaskIntoConstraints="NO" id="2X8-Po-Fkd">
-                                <rect key="frame" x="116" y="111" width="135" height="129"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="2X8-Po-Fkd">
+                                <rect key="frame" x="110" y="107" width="157" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -751,19 +754,20 @@
                     </view>
                     <connections>
                         <outlet property="editButton" destination="Tcg-Rj-cgy" id="P8u-YM-5kQ"/>
-                        <outlet property="emailEditText" destination="q4t-Eu-VAh" id="OdU-KB-Hxf"/>
-                        <outlet property="firstNameEditText" destination="t75-eb-HDE" id="2t0-ls-Fjc"/>
-                        <outlet property="lastNameEditText" destination="Bpt-mU-9tG" id="ktd-LD-nCP"/>
+                        <outlet property="emailTextField" destination="q4t-Eu-VAh" id="eRQ-nQ-YEk"/>
+                        <outlet property="firstNameTextField" destination="t75-eb-HDE" id="hgd-zF-hjO"/>
+                        <outlet property="lastNameTextField" destination="Bpt-mU-9tG" id="Udf-0H-ff1"/>
                         <outlet property="logoutButton" destination="uFg-4V-Nib" id="5Lf-Qp-05d"/>
                         <outlet property="offersNo" destination="emA-4p-Ujk" id="89i-qy-4yF"/>
-                        <outlet property="passwordEditText" destination="G4t-3O-4ol" id="m1j-4X-1sh"/>
+                        <outlet property="passwordTextField" destination="G4t-3O-4ol" id="6z1-yu-fWu"/>
                         <outlet property="profileImage" destination="2X8-Po-Fkd" id="JjQ-KG-fo6"/>
                         <outlet property="saveButton" destination="1Ub-8o-gJ2" id="IwU-Tl-fwW"/>
                         <outlet property="serviceNo" destination="J3Q-Hj-qgr" id="ekR-Of-qbc"/>
+                        <outlet property="tapGesture" destination="cYk-dT-xAV" id="L7g-pc-f0j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2L-4C-bac" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="cYk-dT-xAV">
+                <tapGestureRecognizer enabled="NO" id="cYk-dT-xAV">
                     <connections>
                         <action selector="didClickImage:" destination="EAp-GV-dKz" id="1wv-c2-tQC"/>
                     </connections>
@@ -1243,6 +1247,7 @@
         <image name="ifixlogo" width="300" height="292"/>
         <image name="inprogress" width="30" height="30"/>
         <image name="offer" width="30" height="30"/>
+        <image name="profile" width="512" height="512"/>
         <image name="service" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

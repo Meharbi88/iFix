@@ -7,23 +7,77 @@
 //
 
 import UIKit
-
+import Firebase
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var firstNameEditText: UITextField!
-    @IBOutlet weak var lastNameEditText: UITextField!
-    @IBOutlet weak var emailEditText: UITextField!
-    @IBOutlet weak var passwordEditText: UITextField!
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var serviceNo: UILabel!
     @IBOutlet weak var offersNo: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     
     @IBAction func didClickEditButton(_ sender: Any) {
-        firstNameEditText.isEnabled = true
+        editButton.isEnabled = false
+        tapGesture.isEnabled = true
+        firstNameTextField.isEnabled = true
+        lastNameTextField.isEnabled = true
+        emailTextField.isEnabled = true
+        passwordTextField.isHidden = false
+        passwordTextField.isEnabled = true
+        saveButton.isEnabled = true
+        saveButton.isHidden = false
+        logoutButton.isEnabled = false
+        logoutButton.isHidden = true
     }
+    
+    @IBAction func saveEditing(_ sender: Any) {
+        if (firstNameTextField.text == "" || lastNameTextField.text == "" || emailTextField.text == "" || passwordTextField.text == ""){
+            showAlertEmptyField()
+        } else{
+            let uid = Auth.auth().currentUser?.uid
+            if DataCurrentUser.userType == "User"{
+                let newUser : User = User(email: self.emailTextField.text!, firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: "User", userId: uid!)
+                WriteData.writeUser(user: newUser)
+                uploadImage()
+                Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!, completion: { (error) in
+                    print("email couldn't update")
+                    })
+                Auth.auth().currentUser?.updatePassword(to: self.passwordTextField.text!, completion: { (error) in
+                    print("password couldn't update")
+                })
+            }else{
+                let newServiceProvider : ServiceProvider = ServiceProvider(email: self.emailTextField.text!, firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: DataCurrentServiceProvider.serviceProviderType, serviceProviderId: uid!)
+                WriteData.writeServiceProvider(serviceProvider: newServiceProvider)
+                uploadImage()
+                Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!, completion: { (error) in
+                    print("email couldn't update")
+                })
+                Auth.auth().currentUser?.updatePassword(to: self.passwordTextField.text!, completion: { (error) in
+                    print("password couldn't update")
+                })
+                
+            }
+            editButton.isEnabled = true
+            tapGesture.isEnabled = false
+            firstNameTextField.isEnabled = false
+            lastNameTextField.isEnabled = false
+            emailTextField.isEnabled = false
+            passwordTextField.isHidden = true
+            passwordTextField.isEnabled = false
+            saveButton.isEnabled = false
+            saveButton.isHidden = true
+            logoutButton.isEnabled = true
+            logoutButton.isHidden = false
+
+        }
+    }
+
     
     @IBAction func didClickImage(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
@@ -58,14 +112,69 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func showAlertCameraDoesntWork(){
+        let title = "Camera Not Available"
+        let message = "Sorry, Camera is not available"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "OK", style: .default , handler: nil)
+        alertController.addAction(actionOk)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlertEmptyField(){
+        
+        let title = "Empty Field"
+        let message = "Sorry, You have entered an empty field please fill in all the required fields"
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "OK", style: .default , handler: nil)
+        alertController.addAction(actionOk)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func uploadImage(){
+        let imageName = Auth.auth().currentUser?.uid ?? "0"
+        let storageReference = Storage.storage().reference().child("\(imageName).png")
+        if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
+            storageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print("Couldn't upload data")
+                    return
+                }
+                if let profileImageURL = metadata?.downloadURL()?.absoluteString {
+                    print(profileImageURL)
+                }
+                })
+        }
+    }
+    
+    func loadData(){
+        if (DataCurrentUser.userType == "User"){
+            firstNameTextField.text = DataCurrentUser.user.firstName
+            lastNameTextField.text = DataCurrentUser.user.lastName
+            emailTextField.text = DataCurrentUser.user.email
+            
+        }else{
+            firstNameTextField.text = DataCurrentServiceProvider.serviceProvider.firstName
+            lastNameTextField.text = DataCurrentServiceProvider.serviceProvider.lastName
+            emailTextField.text = DataCurrentServiceProvider.serviceProvider.email
+            
+        }
+        let imageName = Auth.auth().currentUser?.uid ?? "0"
+        let storageReference = Storage.storage().reference().child("\(imageName).png")
+        storageReference.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+            if let error = error {
+                print("Couldn't download \(error)")
+            }else{
+                self.profileImage.image = UIImage(data: data!)
+            }
+        }
         
     }
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        profileImage.layer.cornerRadius = 70
+        loadData()
         // Do any additional setup after loading the view.
     }
 

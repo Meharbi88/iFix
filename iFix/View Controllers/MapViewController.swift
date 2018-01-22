@@ -9,8 +9,8 @@ import UIKit
 import MapKit
 import CoreLocation
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
-    @objc dynamic var annotation = MKAnnotationView()
     @IBOutlet weak var map: MKMapView!
+    var annotation = MKAnnotationView()
     let regionRadius: CLLocationDistance = 1000
     let locationManager = CLLocationManager()
     var moveToUserLocation = false
@@ -31,6 +31,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         default:
             locationManager.startUpdatingLocation()
             self.map.showsUserLocation = true
+            
             self.centerMapOnLocation(userLocation: map.userLocation)
             print("3")
         }
@@ -56,15 +57,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
+   func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        switch newState {
+        case .starting:
+            view.dragState = .dragging
+        case .ending, .canceling:
+            view.dragState = .none
+        default: break
+        }
+    }
+    
     
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
     }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
 
-    }
     
     
     
@@ -73,7 +81,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.delegate = self
         map.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
+        annotation.isDraggable = true
+        
         //print("\(annotation.coordinate)")
         // Do any additional setup after loading the view.
     }

@@ -22,6 +22,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var offersNo: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     var imageHasChange : Bool = false
+    var once : Bool = true
     
     @IBAction func didClickEditButton(_ sender: Any) {
         updateFlags(buttonName: "edit")
@@ -125,6 +126,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             lastNameTextField.text = DataCurrentUser.user.lastName
             emailTextField.text = DataCurrentUser.user.email
             profileImage.image = DataCurrentUser.image
+            serviceNo.text =
+            "Services:\nUnclaimed: \(DataCurrentUser.unclaimedServices.count).\nIn progress: \(DataCurrentUser.inProgressServices.count).\nCompleted: \(DataCurrentUser.completeServices.count)."
+            
+            offersNo.text = "Offers:\nUndetermined: \(DataCurrentUser.undeterminedOffers.count).\nAccepted: \(DataCurrentUser.acceptedOffers.count).\nDeclined: \(DataCurrentUser.declinedOffers.count)."
+            
             
         }else{
             firstNameTextField.text = DataCurrentServiceProvider.serviceProvider.firstName
@@ -167,13 +173,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileImage.layer.cornerRadius = 70
+        //profileImage.layer.cornerRadius = 70
         passwordTextField.text = "1804947"
+    
+        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+        profileImage.clipsToBounds = true;
+        profileImage.layer.borderWidth = 10.0
+        profileImage.layer.borderColor = UIColor.white.cgColor
+        
         loadData()
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-        loadData()
+        if(once){
+            loadData()
+            once = false;
+        }
     }
 
     override func didReceiveMemoryWarning() {

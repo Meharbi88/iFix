@@ -21,19 +21,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var serviceNo: UILabel!
     @IBOutlet weak var offersNo: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
+    var imageHasChange : Bool = false
     
     @IBAction func didClickEditButton(_ sender: Any) {
-        editButton.isEnabled = false
-        tapGesture.isEnabled = true
-        firstNameTextField.isEnabled = true
-        lastNameTextField.isEnabled = true
-        emailTextField.isEnabled = true
-        passwordTextField.isHidden = false
-        passwordTextField.isEnabled = true
-        saveButton.isEnabled = true
-        saveButton.isHidden = false
-        logoutButton.isEnabled = false
-        logoutButton.isHidden = true
+        updateFlags(buttonName: "edit")
     }
     
     @IBAction func saveEditing(_ sender: Any) {
@@ -45,37 +36,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let newUser : User = User(email: self.emailTextField.text!, firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: "User", userId: uid!)
                 WriteData.writeUser(user: newUser)
                 uploadImage()
-                Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!, completion: { (error) in
-                    print("email couldn't update")
-                    })
-                Auth.auth().currentUser?.updatePassword(to: self.passwordTextField.text!, completion: { (error) in
-                    print("password couldn't update")
-                })
+                updateAuth()
+
             }else{
                 let newServiceProvider : ServiceProvider = ServiceProvider(email: self.emailTextField.text!, firstName: self.firstNameTextField.text!, lastName: self.lastNameTextField.text!, password: self.passwordTextField.text!, type: DataCurrentServiceProvider.serviceProviderType, serviceProviderId: uid!)
                 WriteData.writeServiceProvider(serviceProvider: newServiceProvider)
                 uploadImage()
-                Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!, completion: { (error) in
-                    print("email couldn't update")
-                })
-                Auth.auth().currentUser?.updatePassword(to: self.passwordTextField.text!, completion: { (error) in
-                    print("password couldn't update")
-                })
+                updateAuth()
                 
             }
-            editButton.isEnabled = true
-            tapGesture.isEnabled = false
-            firstNameTextField.isEnabled = false
-            lastNameTextField.isEnabled = false
-            emailTextField.isEnabled = false
-            passwordTextField.isHidden = true
-            passwordTextField.isEnabled = false
-            saveButton.isEnabled = false
-            saveButton.isHidden = true
-            logoutButton.isEnabled = true
-            logoutButton.isHidden = false
+            updateFlags(buttonName: "save")
 
         }
+    }
+    
+    func updateAuth(){
+        Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!, completion: { (error) in
+            print("email couldn't update")
+        })
+        Auth.auth().currentUser?.updatePassword(to: self.passwordTextField.text!, completion: { (error) in
+            print("password couldn't update")
+        })
     }
 
     
@@ -104,6 +85,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         profileImage.image = image
+        imageHasChange = true
         picker.dismiss(animated: true, completion: nil)
     }
     
@@ -131,18 +113,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func uploadImage(){
-        let imageName = Auth.auth().currentUser?.uid ?? "0"
-        let storageReference = Storage.storage().reference().child("\(imageName).png")
-        if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
-            storageReference.putData(uploadData, metadata: nil, completion: { (metadata, error) in
-                if error != nil {
-                    print("Couldn't upload data")
-                    return
-                }
-                if let profileImageURL = metadata?.downloadURL()?.absoluteString {
-                    print(profileImageURL)
-                }
-                })
+        if(imageHasChange){
+            let imageName = Auth.auth().currentUser?.uid ?? "0"
+            UploadData.uploadUserOrServiceProviderProfileImage(imageName: imageName, image: profileImage.image)
         }
     }
     
@@ -151,31 +124,56 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             firstNameTextField.text = DataCurrentUser.user.firstName
             lastNameTextField.text = DataCurrentUser.user.lastName
             emailTextField.text = DataCurrentUser.user.email
+            profileImage.image = DataCurrentUser.image
             
         }else{
             firstNameTextField.text = DataCurrentServiceProvider.serviceProvider.firstName
             lastNameTextField.text = DataCurrentServiceProvider.serviceProvider.lastName
             emailTextField.text = DataCurrentServiceProvider.serviceProvider.email
+            profileImage.image = DataCurrentServiceProvider.image
             
-        }
-        let imageName = Auth.auth().currentUser?.uid ?? "0"
-        let storageReference = Storage.storage().reference().child("\(imageName).png")
-        storageReference.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-            if let error = error {
-                print("Couldn't download \(error)")
-            }else{
-                self.profileImage.image = UIImage(data: data!)
-            }
         }
         
     }
     
+    func updateFlags(buttonName: String){
+        if(buttonName == "edit"){
+            editButton.isEnabled = false
+            tapGesture.isEnabled = true
+            firstNameTextField.isEnabled = true
+            lastNameTextField.isEnabled = true
+            emailTextField.isEnabled = true
+            passwordTextField.isHidden = false
+            passwordTextField.isEnabled = true
+            saveButton.isEnabled = true
+            saveButton.isHidden = false
+            logoutButton.isEnabled = false
+            logoutButton.isHidden = true
+        }else if(buttonName == "save"){
+            editButton.isEnabled = true
+            tapGesture.isEnabled = false
+            firstNameTextField.isEnabled = false
+            lastNameTextField.isEnabled = false
+            emailTextField.isEnabled = false
+            passwordTextField.isHidden = true
+            passwordTextField.isEnabled = false
+            saveButton.isEnabled = false
+            saveButton.isHidden = true
+            logoutButton.isEnabled = true
+            logoutButton.isHidden = false
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         profileImage.layer.cornerRadius = 70
+        passwordTextField.text = "1804947"
         loadData()
         // Do any additional setup after loading the view.
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        loadData()
     }
 
     override func didReceiveMemoryWarning() {

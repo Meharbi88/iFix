@@ -21,10 +21,19 @@ class DataCurrentServiceProvider: NSObject {
     static var undeterminedOffers : [Offer] = []
     static var acceptedOffers : [Offer] = []
     static var declinedOffers : [Offer] = []
+    
+    static var image : UIImage? = UIImage(named: "profile")
+
 
     
     class func loadCurrentServiceProviderData(){
         ReadData.readServiceProvider(serviceProviderId: serviceProviderId)
+        loadCurrentServiceProviderImage()
+    }
+    
+    class func loadCurrentServiceProviderImage(){
+        DownloadData.downloadServiceProviderProfileImage(serviceProviderId: serviceProviderId)
+        
     }
     
     

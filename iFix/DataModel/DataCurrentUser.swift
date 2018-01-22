@@ -20,10 +20,17 @@ class DataCurrentUser: NSObject {
     static var undeterminedOffers : [Offer] = []
     static var acceptedOffers : [Offer] = []
     static var declinedOffers : [Offer] = []
+    static var image : UIImage? = UIImage(named: "profile")
 
     //Loading Data
     class func loadCurrentUserData(){
         ReadData.readUser(userId: userId)
+        loadCurrentUserImage()
+        
+    }
+    
+    class func loadCurrentUserImage(){
+        DownloadData.downloadUserProfileImage(userId: userId)
     }
     
     class func loadUnclaimedServicesData(){

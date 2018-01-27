@@ -191,6 +191,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
 
+    @IBAction func logout(_ sender: Any) {
+        DataCurrentUser.clear()
+        DataCurrentServiceProvider.clear()
+        try! Auth.auth().signOut()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

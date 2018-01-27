@@ -657,6 +657,7 @@
                                 <color key="backgroundColor" red="1" green="0.51598404009999999" blue="0.52039665359999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
+                                    <action selector="logout:" destination="EAp-GV-dKz" eventType="touchUpInside" id="an1-6H-CGv"/>
                                     <segue destination="edK-6h-Zvq" kind="showDetail" id="ehv-jB-eq1"/>
                                 </connections>
                             </button>
@@ -1254,7 +1255,7 @@
         <segue reference="Akt-P4-XNs"/>
         <segue reference="POt-n5-s2i"/>
         <segue reference="cwe-JH-PVA"/>
-        <segue reference="ehv-jB-eq1"/>
+        <segue reference="Og3-qU-oQJ"/>
         <segue reference="GVT-3r-Ude"/>
     </inferredMetricsTieBreakers>
 </document>

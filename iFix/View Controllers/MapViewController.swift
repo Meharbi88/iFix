@@ -8,54 +8,77 @@
 import UIKit
 import MapKit
 import CoreLocation
+
+
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var map: MKMapView!
-    var annotation = MKAnnotationView()
-    let regionRadius: CLLocationDistance = 1000
     let locationManager = CLLocationManager()
     var moveToUserLocation = false
+    @IBOutlet var longPress: UILongPressGestureRecognizer!
+    var address : String = ""
+    
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBAction func backButton(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "unwindAferGetLocation", sender: "")
+    }
     
     @IBAction func droppingPin(_ sender: UILongPressGestureRecognizer) {
+        let point = sender.location(in: self.map)
+        let coordinate = self.map.convert(point, toCoordinateFrom: self.map)
+        print(coordinate)
+        //Now use this coordinate to add annotation on map.
+        let annotation1 = CustomAnnotation(title: "Get This Location", locationName: "I am here", coordinate: coordinate)
         
+        //Set title and subtitle if you want
+        
+        self.map.removeAnnotations(map.annotations)
+        self.map.addAnnotation(annotation1)
     }
 
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .denied, .restricted:
-            //manager.requestAlwaysAuthorization()
-            print("1")
+            manager.requestAlwaysAuthorization()
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-            print("2")
         default:
             locationManager.startUpdatingLocation()
+            let location = locationManager.location?.coordinate
+            let annotation = CustomAnnotation(title: "Get This Location", locationName: "You are here", coordinate: location!)
+            let span = MKCoordinateSpanMake(0.0030, 0.0030)
+            let region = MKCoordinateRegion(center: location!, span: span)
+            map.setRegion(region, animated: true)
+            self.map.addAnnotation(annotation)
             self.map.showsUserLocation = true
             
-            self.centerMapOnLocation(userLocation: map.userLocation)
-            print("3")
         }
     }
     
-    
-    
-    func centerMapOnLocation(userLocation : MKUserLocation){
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, regionRadius * 2.0, regionRadius * 2.0)
-        map.setRegion(coordinateRegion, animated: true)
-    }
-    
-    
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        if !moveToUserLocation {
-            mapView.region.center = mapView.userLocation.coordinate
-            moveToUserLocation = true
-            annotation.setSelected(true, animated: true)
-            annotation.isDraggable = true
-            //annotation.de
-            //annotation.didChange(.insertion, valuesAt: .insertion, for: .)
-            
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard let annotation = annotation as? CustomAnnotation else { return nil }
+        // 3
+        let identifier = "marker"
+        var view: MKMarkerAnnotationView
+        // 4
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKMarkerAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            // 5
+            view = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.isDraggable = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .contactAdd)
         }
+        return view
     }
+    
+    
     
    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         switch newState {
@@ -67,13 +90,43 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
+                 calloutAccessoryControlTapped control: UIControl) {
+        let location = view.annotation as! CustomAnnotation
+        let clLocation = CLLocation(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        getAddressAndUnwind(clLocation: clLocation)
     }
-
     
+    func getAddressAndUnwind(clLocation: CLLocation){
+        
+        let geoCoder = CLGeocoder()
+        geoCoder.reverseGeocodeLocation(clLocation, completionHandler: {(placemarks, error)->Void in
+            
+            var placemark:CLPlacemark!
+                placemark = placemarks![0] as CLPlacemark
+            
+                    if placemark.subThoroughfare != nil {
+                        self.address = placemark.subThoroughfare! + " "
+                    }
+                    if placemark.thoroughfare != nil {
+                        self.address = self.address + placemark.thoroughfare! + ", "
+                    }
+                    if placemark.postalCode != nil {
+                        self.address = self.address + placemark.postalCode! + " "
+                    }
+                    if placemark.locality != nil {
+                        self.address = self.address + placemark.locality! + ", "
+                    }
+                    if placemark.administrativeArea != nil {
+                        self.address = self.address + placemark.administrativeArea! + " "
+                    }
+                    if placemark.country != nil {
+                        self.address = self.address + placemark.country!
+                    }
+            print(self.address)
+            self.performSegue(withIdentifier: "unwindAferGetLocation", sender: self.address)
+        })
+    }
     
     
     override func viewDidLoad() {
@@ -81,11 +134,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.delegate = self
         map.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        annotation.isDraggable = true
-        
-        //print("\(annotation.coordinate)")
+        longPress.numberOfTouchesRequired = 1
+        backButton.layer.cornerRadius = 15
+        backButton.layer.borderColor = UIColor.lightGray.cgColor
+        backButton.layer.borderWidth = 2
+        map.addGestureRecognizer(longPress)
         // Do any additional setup after loading the view.
     }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

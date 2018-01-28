@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1081,15 +1081,28 @@
                                     <outletCollection property="gestureRecognizers" destination="txc-Nq-ypf" appends="YES" id="tW2-6K-N0Y"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3x-na-xpp">
+                                <rect key="frame" x="47" y="84" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" image="icons8-back-24"/>
+                                <connections>
+                                    <action selector="backButton:" destination="99u-20-3kq" eventType="touchUpInside" id="dw0-tF-fqT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="e96-6L-WKe"/>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="G3x-na-xpp" id="unR-Pu-kNM"/>
+                        <outlet property="longPress" destination="txc-Nq-ypf" id="gT1-kV-3F1"/>
                         <outlet property="map" destination="k7P-ke-iAr" id="agd-qz-bcr"/>
+                        <segue destination="SS6-Ec-K80" kind="unwind" identifier="unwindAferGetLocation" unwindAction="unwindFromMapWithSegue:" id="X4u-Ad-PQE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zxs-11-RYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SS6-Ec-K80" userLabel="Exit" sceneMemberID="exit"/>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="txc-Nq-ypf">
                     <connections>
                         <action selector="droppingPin:" destination="99u-20-3kq" id="bcQ-Kb-R1C"/>
@@ -1242,6 +1255,7 @@
         <image name="Cars" width="1600" height="1064"/>
         <image name="currentlocation" width="30" height="30"/>
         <image name="done" width="30" height="30"/>
+        <image name="icons8-back-24" width="24" height="24"/>
         <image name="icons8-cancel-40" width="40" height="40"/>
         <image name="icons8-circled-plus-30" width="30" height="30"/>
         <image name="icons8-customer-24" width="24" height="24"/>
@@ -1252,9 +1266,9 @@
         <image name="service" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Akt-P4-XNs"/>
-        <segue reference="POt-n5-s2i"/>
-        <segue reference="cwe-JH-PVA"/>
+        <segue reference="zRV-1t-L5j"/>
+        <segue reference="9sj-aB-mX9"/>
+        <segue reference="bNk-8k-69h"/>
         <segue reference="Og3-qU-oQJ"/>
         <segue reference="GVT-3r-Ude"/>
     </inferredMetricsTieBreakers>

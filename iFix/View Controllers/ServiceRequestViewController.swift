@@ -81,6 +81,12 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
         present(alertController, animated: true, completion: nil)
     }
     
+    @IBAction func unwindFromMap(segue:UIStoryboardSegue) {
+        if let sourceViewController = segue.source as? MapViewController {
+            userAddress.text = sourceViewController.address
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicatorView.isHidden = true
@@ -95,6 +101,8 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 
     /*

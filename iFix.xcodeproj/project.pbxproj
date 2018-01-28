@@ -29,6 +29,7 @@
 		2985D8532010766200E69B9E /* OffersForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985D8522010766200E69B9E /* OffersForServiceProviderTableViewCell.swift */; };
 		2985D85520107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985D85420107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift */; };
 		2985D85720107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2985D85620107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift */; };
+		29A85BCC201D5EFD00297F16 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A85BCB201D5EFD00297F16 /* CustomAnnotation.swift */; };
 		29AD1E30200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AD1E2F200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift */; };
 		7D044D1520097AAF0063BCBE /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D044D1420097AAF0063BCBE /* ServiceProvider.swift */; };
 		7D044D53200C65080063BCBE /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D044D52200C65080063BCBE /* RandomGenerator.swift */; };
@@ -91,6 +92,7 @@
 		2985D8522010766200E69B9E /* OffersForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
 		2985D85420107A8900E69B9E /* InProgressForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
 		2985D85620107D6E00E69B9E /* CompleteForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
+		29A85BCB201D5EFD00297F16 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		29AD1E2F200D867000389AC1 /* UnclaimedServicesForServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnclaimedServicesForServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
 		34FCCCAD11003693D6755753 /* Pods-iFixTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFixTests/Pods-iFixTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C9C20EC513831B95AF5B0D2 /* Pods-iFixUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iFixUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iFixUITests/Pods-iFixUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				29541E092009971700935CDC /* Service.swift */,
 				7D044D1420097AAF0063BCBE /* ServiceProvider.swift */,
 				7DD1735C200D6074009E42FD /* DataCurrentServiceProvider.swift */,
+				29A85BCB201D5EFD00297F16 /* CustomAnnotation.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -618,6 +621,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2914BE6F20101C6E001B69CE /* ReadAllDataForServiceProvider.swift in Sources */,
+				29A85BCC201D5EFD00297F16 /* CustomAnnotation.swift in Sources */,
 				2914BE6D20101C51001B69CE /* ReadAllDataForUser.swift in Sources */,
 				2914BE6620100BE6001B69CE /* Offer.swift in Sources */,
 				7DCA25DE1FFDEFB900917C12 /* UserHomeViewController.swift in Sources */,

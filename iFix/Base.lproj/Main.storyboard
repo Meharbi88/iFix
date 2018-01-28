@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="GurmukhiMN.ttc">
+            <string>GurmukhiMN-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -79,14 +84,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sZv-AE-FRX">
                                 <rect key="frame" x="16" y="430" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please Log In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DqC-xm-4RD">
                                 <rect key="frame" x="67" y="323" width="241" height="44"/>
@@ -169,28 +174,28 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iC-64-AXD">
-                                                    <rect key="frame" x="15" y="15" width="345" height="22"/>
+                                                    <rect key="frame" x="108" y="15" width="252" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7K-AC-77c">
-                                                    <rect key="frame" x="15" y="45" width="345" height="22"/>
+                                                    <rect key="frame" x="108" y="45" width="252" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Service Provider name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAG-Jl-2dL">
-                                                    <rect key="frame" x="15" y="75" width="345" height="22"/>
+                                                    <rect key="frame" x="108" y="75" width="252" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-wp-7bh">
-                                                    <rect key="frame" x="15" y="105" width="345" height="22"/>
+                                                    <rect key="frame" x="108" y="105" width="252" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -205,12 +210,18 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Cars" translatesAutoresizingMaskIntoConstraints="NO" id="1lz-AD-Y07">
+                                                    <rect key="frame" x="15" y="15" width="85" height="112"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="didntShowUp" destination="gS4-fQ-baY" id="MIV-bu-OFj"/>
                                             <outlet property="price" destination="c9R-wp-7bh" id="XlX-gc-J1d"/>
+                                            <outlet property="serviceImage" destination="1lz-AD-Y07" id="wSn-Yw-Kn2"/>
                                             <outlet property="serviceName" destination="7iC-64-AXD" id="xKR-w1-gsC"/>
                                             <outlet property="serviceProviderName" destination="EAG-Jl-2dL" id="akT-B1-i66"/>
                                             <outlet property="serviceType" destination="W7K-AC-77c" id="qxM-d3-ryB"/>
@@ -240,7 +251,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHx-OE-XQO">
                                                     <rect key="frame" x="15" y="71" width="345" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -297,7 +308,7 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Oii-0a-e3x">
                                                 <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="icons8-customer-24"/>
+                                                <state key="normal" image="profile icon"/>
                                                 <connections>
                                                     <segue destination="EAp-GV-dKz" kind="showDetail" id="RXw-dD-kLA"/>
                                                 </connections>
@@ -308,7 +319,7 @@
                                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.25064299080000002" green="0.78884438450000005" blue="0.22725280719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="icons8-circled-plus-30"/>
+                                                <state key="normal" image="create service"/>
                                                 <connections>
                                                     <segue destination="wTQ-Lj-4gx" kind="showDetail" id="ehY-hO-YK4"/>
                                                 </connections>
@@ -325,7 +336,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="QGR-tm-A2t"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="In Progress" image="inprogress" id="jM5-it-het"/>
+                    <tabBarItem key="tabBarItem" title="In Progress" image="in progress" id="jM5-it-het"/>
                     <connections>
                         <outlet property="inProgressTable" destination="TYI-rq-vFR" id="uVu-Le-uED"/>
                         <outlet property="topBar" destination="zdj-nX-LLz" id="eta-vS-0A4"/>
@@ -358,31 +369,37 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1RJ-fp-czQ">
-                                                    <rect key="frame" x="15" y="15" width="345" height="22"/>
+                                                    <rect key="frame" x="101" y="15" width="259" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6OI-aa-j9K">
-                                                    <rect key="frame" x="15" y="45" width="345" height="22"/>
+                                                    <rect key="frame" x="101" y="45" width="259" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMD-We-WYf">
-                                                    <rect key="frame" x="15" y="75" width="345" height="22"/>
+                                                    <rect key="frame" x="101" y="75" width="259" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Cars" translatesAutoresizingMaskIntoConstraints="NO" id="4vz-qF-uPd">
+                                                    <rect key="frame" x="15" y="15" width="78" height="82"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="price" destination="AMD-We-WYf" id="wE4-7f-Ctd"/>
+                                            <outlet property="serviceImage" destination="4vz-qF-uPd" id="fup-CG-MSs"/>
                                             <outlet property="serviceName" destination="1RJ-fp-czQ" id="849-bU-eRy"/>
                                             <outlet property="serviceType" destination="6OI-aa-j9K" id="IMN-eZ-Bie"/>
                                         </connections>
@@ -432,7 +449,7 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hj6-lJ-aYy">
                                                 <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="icons8-customer-24"/>
+                                                <state key="normal" image="profile icon"/>
                                                 <connections>
                                                     <segue destination="EAp-GV-dKz" kind="showDetail" id="cwe-JH-PVA"/>
                                                 </connections>
@@ -443,7 +460,7 @@
                                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.25064299080000002" green="0.78884438450000005" blue="0.22725280719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="icons8-circled-plus-30"/>
+                                                <state key="normal" image="create service"/>
                                                 <connections>
                                                     <segue destination="wTQ-Lj-4gx" kind="showDetail" id="POt-n5-s2i"/>
                                                 </connections>
@@ -493,28 +510,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spq-CY-eI6">
-                                                    <rect key="frame" x="15" y="15" width="345" height="22"/>
+                                                    <rect key="frame" x="93" y="21" width="267" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRy-5g-hd4">
-                                                    <rect key="frame" x="15" y="45" width="345" height="22"/>
+                                                    <rect key="frame" x="93" y="51" width="267" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPh-aP-rPc">
-                                                    <rect key="frame" x="15" y="75" width="345" height="22"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Cars" translatesAutoresizingMaskIntoConstraints="NO" id="Qr8-0v-wdc">
+                                                    <rect key="frame" x="15" y="21" width="70" height="82"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVm-A9-LpS">
-                                                    <rect key="frame" x="15" y="105" width="162" height="36"/>
+                                                    <rect key="frame" x="15" y="114" width="162" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.84720019040000005" green="0.44012711850000003" blue="0.4480592041" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -523,7 +538,7 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tSj-nE-JYk">
-                                                    <rect key="frame" x="198" y="105" width="162" height="36"/>
+                                                    <rect key="frame" x="198" y="114" width="162" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.25064299080000002" green="0.78884438450000005" blue="0.22725280719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -531,6 +546,13 @@
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XPh-aP-rPc">
+                                                    <rect key="frame" x="93" y="81" width="267" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -538,6 +560,7 @@
                                             <outlet property="acceptOffer" destination="tSj-nE-JYk" id="BpX-6O-rnD"/>
                                             <outlet property="declineOffer" destination="oVm-A9-LpS" id="J8M-1R-0T6"/>
                                             <outlet property="price" destination="XPh-aP-rPc" id="vGG-DH-kXe"/>
+                                            <outlet property="serviceImage" destination="Qr8-0v-wdc" id="sNh-WW-g3X"/>
                                             <outlet property="serviceName" destination="spq-CY-eI6" id="v4b-ei-jIe"/>
                                             <outlet property="serviceType" destination="ZRy-5g-hd4" id="xnZ-UI-3RO"/>
                                         </connections>
@@ -605,7 +628,7 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bhP-ZV-c4J">
                                                 <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="icons8-customer-24"/>
+                                                <state key="normal" image="profile icon"/>
                                                 <connections>
                                                     <segue destination="EAp-GV-dKz" kind="showDetail" id="Yqw-wt-KgS"/>
                                                 </connections>
@@ -616,7 +639,7 @@
                                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.25064299080000002" green="0.78884438450000005" blue="0.22725280719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="icons8-circled-plus-30"/>
+                                                <state key="normal" image="create service"/>
                                                 <connections>
                                                     <segue destination="wTQ-Lj-4gx" kind="showDetail" id="3A8-Ac-kH3"/>
                                                 </connections>
@@ -652,10 +675,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uFg-4V-Nib">
-                                <rect key="frame" x="122" y="726" width="132" height="30"/>
+                                <rect key="frame" x="122" y="726" width="132" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.51598404009999999" blue="0.52039665359999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Logout"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="logout:" destination="EAp-GV-dKz" eventType="touchUpInside" id="an1-6H-CGv"/>
                                     <segue destination="edK-6h-Zvq" kind="showDetail" id="ehv-jB-eq1"/>
@@ -688,34 +714,37 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bpt-mU-9tG">
                                 <rect key="frame" x="16" y="485" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q4t-Eu-VAh">
                                 <rect key="frame" x="16" y="532" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passowrd" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4t-3O-4ol">
                                 <rect key="frame" x="16" y="581" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ub-8o-gJ2">
-                                <rect key="frame" x="16" y="647" width="335" height="30"/>
+                                <rect key="frame" x="16" y="647" width="343" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.61168060970000004" green="1" blue="0.5552702088" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Save"/>
+                                <color key="backgroundColor" red="0.25064299080000002" green="0.78884438450000005" blue="0.22725280719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="saveEditing:" destination="EAp-GV-dKz" eventType="touchUpInside" id="Cdt-tu-H7m"/>
                                 </connections>
@@ -802,7 +831,7 @@
                                                     <rect key="frame" x="314" y="24" width="46" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                                    <state key="normal" image="icons8-cancel-40">
+                                                    <state key="normal" image="cancel">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
@@ -838,6 +867,7 @@
                                         <connections>
                                             <outlet property="cancelButton" destination="YTB-hB-R8Q" id="hpm-0V-ckK"/>
                                             <outlet property="numberOfOffers" destination="dHU-hL-eXS" id="UHG-mM-KuI"/>
+                                            <outlet property="serviceImage" destination="tjy-UC-4vG" id="aa8-gV-AEY"/>
                                             <outlet property="serviceName" destination="nbx-jn-sI6" id="AEH-Cx-ZnJ"/>
                                             <outlet property="serviceType" destination="kS8-dl-OQl" id="bo5-tP-1Ji"/>
                                         </connections>
@@ -914,7 +944,7 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wlM-5i-1nX">
                                                 <rect key="frame" x="16" y="10" width="24" height="24"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="icons8-customer-24"/>
+                                                <state key="normal" image="profile icon"/>
                                                 <connections>
                                                     <segue destination="EAp-GV-dKz" kind="showDetail" id="bNk-8k-69h"/>
                                                 </connections>
@@ -925,7 +955,7 @@
                                                 <rect key="frame" x="329" y="7" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="tintColor" red="0.25064299080000002" green="0.78884438450000005" blue="0.22725280719999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" image="icons8-circled-plus-30"/>
+                                                <state key="normal" image="create service"/>
                                                 <connections>
                                                     <segue destination="wTQ-Lj-4gx" kind="showDetail" id="9sj-aB-mX9"/>
                                                 </connections>
@@ -966,21 +996,21 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="opL-rr-xfa">
                                 <rect key="frame" x="16" y="130" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="tel"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="tel"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jSw-Ho-BIi">
                                 <rect key="frame" x="16" y="168" width="281" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="location"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="location"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LbO-JR-nZF">
                                 <rect key="frame" x="16" y="206" width="343" height="21"/>
@@ -1044,6 +1074,13 @@
                                     <segue destination="99u-20-3kq" kind="showDetail" id="QYq-Nz-XJW"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Request Service" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKs-hE-HMV">
+                                <rect key="frame" x="16" y="44" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GurmukhiMN-Bold" family="Gurmukhi MN" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="BAw-bI-cRe"/>
@@ -1085,11 +1122,23 @@
                                 <rect key="frame" x="47" y="84" width="49" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <state key="normal" image="icons8-back-24"/>
+                                <state key="normal" image="back"/>
                                 <connections>
                                     <action selector="backButton:" destination="99u-20-3kq" eventType="touchUpInside" id="dw0-tF-fqT"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="PFl-et-IBA">
+                                <rect key="frame" x="16" y="715" width="343" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Road"/>
+                                    <segment title="Satellite"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeMapType:" destination="99u-20-3kq" eventType="valueChanged" id="oqC-Jl-G4h"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="e96-6L-WKe"/>
@@ -1098,6 +1147,7 @@
                         <outlet property="backButton" destination="G3x-na-xpp" id="unR-Pu-kNM"/>
                         <outlet property="longPress" destination="txc-Nq-ypf" id="gT1-kV-3F1"/>
                         <outlet property="map" destination="k7P-ke-iAr" id="agd-qz-bcr"/>
+                        <outlet property="mapTypeSegments" destination="PFl-et-IBA" id="XnE-Ku-70G"/>
                         <segue destination="SS6-Ec-K80" kind="unwind" identifier="unwindAferGetLocation" unwindAction="unwindFromMapWithSegue:" id="X4u-Ad-PQE"/>
                     </connections>
                 </viewController>
@@ -1144,28 +1194,28 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TRa-qA-jSj">
                                 <rect key="frame" x="16" y="302" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="family-name"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="family-name"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FwF-e2-5tr">
                                 <rect key="frame" x="16" y="344" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VMk-bC-7rx">
                                 <rect key="frame" x="16" y="382" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create an Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sn3-LT-wZH">
                                 <rect key="frame" x="67" y="147" width="241" height="44"/>
@@ -1253,23 +1303,23 @@
     </scenes>
     <resources>
         <image name="Cars" width="1600" height="1064"/>
+        <image name="back" width="24" height="24"/>
+        <image name="cancel" width="40" height="40"/>
+        <image name="create service" width="30" height="30"/>
         <image name="currentlocation" width="30" height="30"/>
         <image name="done" width="30" height="30"/>
-        <image name="icons8-back-24" width="24" height="24"/>
-        <image name="icons8-cancel-40" width="40" height="40"/>
-        <image name="icons8-circled-plus-30" width="30" height="30"/>
-        <image name="icons8-customer-24" width="24" height="24"/>
         <image name="ifixlogo" width="300" height="292"/>
-        <image name="inprogress" width="30" height="30"/>
+        <image name="in progress" width="30" height="30"/>
         <image name="offer" width="30" height="30"/>
         <image name="profile" width="512" height="512"/>
+        <image name="profile icon" width="24" height="24"/>
         <image name="service" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zRV-1t-L5j"/>
-        <segue reference="9sj-aB-mX9"/>
-        <segue reference="bNk-8k-69h"/>
-        <segue reference="Og3-qU-oQJ"/>
+        <segue reference="Akt-P4-XNs"/>
+        <segue reference="ehY-hO-YK4"/>
+        <segue reference="RXw-dD-kLA"/>
+        <segue reference="ehv-jB-eq1"/>
         <segue reference="GVT-3r-Ude"/>
     </inferredMetricsTieBreakers>
 </document>

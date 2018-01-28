@@ -11,6 +11,8 @@ import CoreLocation
 
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+    @IBOutlet weak var mapTypeSegments: UISegmentedControl!
+    
     @IBOutlet weak var map: MKMapView!
     let locationManager = CLLocationManager()
     var moveToUserLocation = false
@@ -18,6 +20,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var address : String = ""
     
     @IBOutlet weak var backButton: UIButton!
+    
+    @IBAction func changeMapType(_ sender: UISegmentedControl) {
+        switch(sender.selectedSegmentIndex){
+        case 0:
+            map.mapType = MKMapType.standard
+            break
+        case 1:
+            map.mapType = MKMapType.satellite
+            break
+        case 2:
+            map.mapType = MKMapType.hybrid
+            break
+        default:
+            break
+        }
+
+    }
     
     @IBAction func backButton(_ sender: UIButton) {
         self.performSegue(withIdentifier: "unwindAferGetLocation", sender: "")
@@ -45,14 +64,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             locationManager.requestWhenInUseAuthorization()
         default:
             locationManager.startUpdatingLocation()
-            let location = locationManager.location?.coordinate
-            let annotation = CustomAnnotation(title: "Get This Location", locationName: "You are here", coordinate: location!)
-            let span = MKCoordinateSpanMake(0.0030, 0.0030)
-            let region = MKCoordinateRegion(center: location!, span: span)
-            map.setRegion(region, animated: true)
-            self.map.addAnnotation(annotation)
-            self.map.showsUserLocation = true
-            
+            if let location = locationManager.location?.coordinate {
+                let annotation = CustomAnnotation(title: "Get This Location", locationName: "You are here", coordinate: location)
+                let span = MKCoordinateSpanMake(0.0030, 0.0030)
+                let region = MKCoordinateRegion(center: location, span: span)
+                map.setRegion(region, animated: true)
+                self.map.addAnnotation(annotation)
+                self.map.showsUserLocation = true
+            }
         }
     }
     
@@ -131,6 +150,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapTypeSegments.backgroundColor = UIColor.white
+        mapTypeSegments.layer.cornerRadius = 5
+        mapTypeSegments.clipsToBounds = true
         locationManager.delegate = self
         map.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest

@@ -25,7 +25,7 @@ class InProgressViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(DataCurrentUser.userType=="User"){
             let userInProgressCell = tableView.dequeueReusableCell(withIdentifier: "inProgressServicesCell", for: indexPath) as! InProgressTableViewCell
-
+            userInProgressCell.serviceImage.image = UIImage(named: DataCurrentUser.inProgressServices[indexPath.row].type)
             userInProgressCell.serviceName.text = DataCurrentUser.inProgressServices[indexPath.row].name
             
             userInProgressCell.serviceType.text = DataCurrentUser.inProgressServices[indexPath.row].type

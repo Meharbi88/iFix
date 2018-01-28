@@ -10,6 +10,7 @@ import UIKit
 
 class CompleteTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var serviceImage: UIImageView!
     @IBOutlet weak var serviceName: UILabel!
     
     @IBOutlet weak var serviceType: UILabel!

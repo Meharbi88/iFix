@@ -35,7 +35,7 @@ class UserHomeViewController: UIViewController, UITableViewDataSource, UITableVi
             unclaimedCell.serviceType.text = DataCurrentUser.unclaimedServices[indexPath.row].type
             unclaimedCell.serviceId = DataCurrentUser.unclaimedServices[indexPath.row].serviceId
             unclaimedCell.numberOfOffers.text = "Number of Offers: \(DataCurrentUser.getNumberOfOffers(serviceId: DataCurrentUser.unclaimedServices[indexPath.row].serviceId))"
-
+            unclaimedCell.serviceImage.image = UIImage(named: DataCurrentUser.unclaimedServices[indexPath.row].type)
             unclaimedCell.cancelButton.addTarget(self, action: #selector(cancelRequest), for: .touchUpInside)
             unclaimedCell.cancelButton.tag = indexPath.row
             

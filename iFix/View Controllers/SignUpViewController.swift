@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
@@ -20,12 +20,31 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var iCanDoLabel: UILabel!
     @IBOutlet weak var serviceTypesPicker: UIPickerView!
-    var type : String = "Plumping"
-    let sub = ["Plumping", "Cars", "Home Appliances", "Electricity", "Electronic Devices", "Smart Phones"]
+    var type : String = "Plumbing"
+    let sub = ["Plumbing", "Cars", "Home Appliances", "Electricity", "Electronic Devices", "Smart Phones"]
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        firstNameTextField.endEditing(true)
+        lastNameTextField.endEditing(true)
+        emailTextField.endEditing(true)
+        passwordTextField.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        firstNameTextField.endEditing(true)
+        lastNameTextField.endEditing(true)
+        emailTextField.endEditing(true)
+        passwordTextField.endEditing(true)
+        return false
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         
         cancelButton.layer.cornerRadius = 15
         cancelButton.layer.borderColor = UIColor.black.cgColor

@@ -27,6 +27,8 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         if(DataCurrentUser.userType=="User"){
             let userCompleteCell = tableView.dequeueReusableCell(withIdentifier: "completeServicesCell", for: indexPath) as! CompleteTableViewCell
             
+            userCompleteCell.serviceImage.image = UIImage(named: DataCurrentUser.completeServices[indexPath.row].type)
+            
             userCompleteCell.serviceName.text = DataCurrentUser.completeServices[indexPath.row].name
             
             userCompleteCell.serviceType.text = DataCurrentUser.completeServices[indexPath.row].type

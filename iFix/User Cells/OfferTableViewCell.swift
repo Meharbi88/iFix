@@ -9,6 +9,7 @@
 import UIKit
 
 class OfferTableViewCell: UITableViewCell {
+    @IBOutlet weak var serviceImage: UIImageView!
     @IBOutlet weak var serviceName: UILabel!
     
     @IBOutlet weak var serviceType: UILabel!

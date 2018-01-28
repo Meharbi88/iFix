@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     @IBOutlet weak var editButton: UIBarButtonItem!
@@ -23,6 +23,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var logoutButton: UIButton!
     var imageHasChange : Bool = false
     var once : Bool = true
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        firstNameTextField.endEditing(true)
+        lastNameTextField.endEditing(true)
+        emailTextField.endEditing(true)
+        passwordTextField.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        firstNameTextField.endEditing(true)
+        lastNameTextField.endEditing(true)
+        emailTextField.endEditing(true)
+        passwordTextField.endEditing(true)
+        return false
+    }
     
     @IBAction func didClickEditButton(_ sender: Any) {
         updateFlags(buttonName: "edit")
@@ -138,6 +153,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             emailTextField.text = DataCurrentServiceProvider.serviceProvider.email
             profileImage.image = DataCurrentServiceProvider.image
             
+            serviceNo.text =
+            "Services:\nUnclaimed: \(DataCurrentServiceProvider.unclaimedServices.count).\nIn progress: \(DataCurrentServiceProvider.inProgressServices.count).\nCompleted: \(DataCurrentServiceProvider.completeServices.count)."
+            
+            offersNo.text = "Offers:\nUndetermined: \(DataCurrentServiceProvider.undeterminedOffers.count).\nAccepted: \(DataCurrentServiceProvider.acceptedOffers.count).\nDeclined: \(DataCurrentServiceProvider.declinedOffers.count)."
+            
         }
         
     }
@@ -173,9 +193,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        
         //profileImage.layer.cornerRadius = 70
         passwordTextField.text = "1804947"
-    
+        
+        logoutButton.layer.cornerRadius = 15
+        logoutButton.layer.borderColor = UIColor.black.cgColor
+        logoutButton.layer.borderWidth = 2
+        
+        saveButton.layer.cornerRadius = 15
+        saveButton.layer.borderColor = UIColor.black.cgColor
+        saveButton.layer.borderWidth = 2
+
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         profileImage.clipsToBounds = true;
         profileImage.layer.borderWidth = 10.0

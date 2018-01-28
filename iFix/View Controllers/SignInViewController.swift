@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -20,8 +20,21 @@ class SignInViewController: UIViewController {
     var userType: String = ""
     var type: String = ""
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        emailTextField.endEditing(true)
+        passwordTextField.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.endEditing(true)
+        passwordTextField.endEditing(true)
+        return false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         emailTextField.text = "meharbi88@gmail.com"
         passwordTextField.text = "1804947"
         logInButton.isEnabled = true;

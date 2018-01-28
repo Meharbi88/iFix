@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate {
+class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var serviceName: UITextField!
@@ -20,9 +20,23 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
     
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
-    var type : String = "Plumping"
+    var type : String = "Plumbing"
     
-    let sub = ["Plumping", "Cars", "Home Appliances", "Electricity", "Electronic Devices", "Smart Phones"]
+    let sub = ["Plumbing", "Cars", "Home Appliances", "Electricity", "Electronic Devices", "Smart Phones"]
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        userPhoneNumber.endEditing(true)
+        userAddress.endEditing(true)
+        serviceName.endEditing(true)
+        serviceDescription.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        userPhoneNumber.endEditing(true)
+        userAddress.endEditing(true)
+        serviceName.endEditing(true)
+        return false
+    }
     
     @IBAction func serivceRequestSubmit(_ sender: Any) {
         
@@ -89,6 +103,10 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userPhoneNumber.delegate = self
+        userAddress.delegate = self
+        serviceName.delegate = self
+        serviceDescription.delegate = self
         activityIndicatorView.isHidden = true
         submitButton.layer.cornerRadius = 15
         cancelButton.layer.cornerRadius = 15

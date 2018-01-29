@@ -2,8 +2,8 @@
 //  ReadAllDataForUser.swift
 //  iFix
 //
-//  Created by Fahad Alharbi on 1/17/18.
-//  Copyright © 2018 Mohammad Alharbi. All rights reserved.
+//  Created by Mohammad Alharbi on 1/17/18.
+//  Copyright © 2018 Mohammad Alharbi, Fahad Alharbi. All rights reserved.
 //
 
 import Foundation

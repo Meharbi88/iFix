@@ -3,7 +3,7 @@
 //  iFix
 //
 //  Created by Mohammad Alharbi on 1/3/18.
-//  Copyright © 2018 Mohammad Alharbi. All rights reserved.
+//  Copyright © 2018 Mohammad Alharbi, Fahad Alharbi. All rights reserved.
 //
 
 import UIKit

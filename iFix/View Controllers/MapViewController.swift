@@ -3,7 +3,7 @@
 //  
 //
 //  Created by Fahad Alharbi on 1/20/18.
-//
+//  Copyright © 2018 Mohammad Alharbi, Fahad Alharbi. All rights reserved.
 
 import UIKit
 import MapKit

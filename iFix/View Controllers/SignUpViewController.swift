@@ -40,7 +40,10 @@ class SignUpViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        firstNameTextField.text = "demo"
+//        lastNameTextField.text = "demo"
+//        emailTextField.text = "demo@gmail.com"
+//        passwordTextField.text = "1234567890"
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
         emailTextField.delegate = self

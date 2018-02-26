@@ -35,8 +35,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        emailTextField.text = "meharbi88@gmail.com"
-        passwordTextField.text = "1804947"
+//        emailTextField.text = "demo@gmail.com"
+//        passwordTextField.text = "1234567890"
         logInButton.isEnabled = true;
         DataCurrentUser.userId = ""
         DataCurrentServiceProvider.serviceProviderId = ""

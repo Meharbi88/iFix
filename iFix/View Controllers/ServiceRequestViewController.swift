@@ -103,6 +103,9 @@ class ServiceRequestViewController: UIViewController,UIPickerViewDataSource, UIP
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        serviceName.text = "Service 1"
+//        userPhoneNumber.text = "+2168350797"
+        
         userPhoneNumber.delegate = self
         userAddress.delegate = self
         serviceName.delegate = self

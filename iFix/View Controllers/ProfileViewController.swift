@@ -67,9 +67,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func updateAuth(){
-        Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!, completion: { (error) in
-            print("email couldn't update")
-        })
+        if(Auth.auth().currentUser?.email != self.emailTextField.text!){
+            Auth.auth().currentUser?.updateEmail(to: self.emailTextField.text!, completion: { (error) in
+                print("email couldn't update")
+            })
+        }
+        
         Auth.auth().currentUser?.updatePassword(to: self.passwordTextField.text!, completion: { (error) in
             print("password couldn't update")
         })
@@ -140,6 +143,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             firstNameTextField.text = DataCurrentUser.user.firstName
             lastNameTextField.text = DataCurrentUser.user.lastName
             emailTextField.text = DataCurrentUser.user.email
+            passwordTextField.text = DataCurrentUser.user.password
             profileImage.image = DataCurrentUser.image
             serviceNo.text =
             "Services:\nUnclaimed: \(DataCurrentUser.unclaimedServices.count).\nIn progress: \(DataCurrentUser.inProgressServices.count).\nCompleted: \(DataCurrentUser.completeServices.count)."
@@ -151,6 +155,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             firstNameTextField.text = DataCurrentServiceProvider.serviceProvider.firstName
             lastNameTextField.text = DataCurrentServiceProvider.serviceProvider.lastName
             emailTextField.text = DataCurrentServiceProvider.serviceProvider.email
+              passwordTextField.text = DataCurrentServiceProvider.serviceProvider.password
             profileImage.image = DataCurrentServiceProvider.image
             
             serviceNo.text =
@@ -199,7 +204,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         passwordTextField.delegate = self
         
         //profileImage.layer.cornerRadius = 70
-        passwordTextField.text = "1804947"
         
         logoutButton.layer.cornerRadius = 15
         logoutButton.layer.borderColor = UIColor.black.cgColor

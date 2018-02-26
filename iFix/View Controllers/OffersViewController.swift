@@ -36,7 +36,7 @@ class OffersViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             userOfferCell.declineOffer.addTarget(self, action: #selector(declineOffer), for: .touchUpInside)
             userOfferCell.declineOffer.tag = indexPath.row
-            
+
             userOfferCell.serviceImage.image = UIImage(named: (DataCurrentUser.getServiceFromUnclaimedServices(serviceId: DataCurrentUser.undeterminedOffers[indexPath.row].serviceId)?.type)!)
             
             userOfferCell.layer.cornerRadius = 15
